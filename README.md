@@ -21,11 +21,13 @@
  > * Why is it important or interesting to you?
  >   * Santa's Delivery is a spin off the game Battleship. We find it interesting because we are taking an original game and putting our own twist to it since Christmas is around the corner.
  > * What languages/tools/technologies do you plan to use? (This list may change over the course of the project)
- >   * [toolname](link) - Short description
+ >   * [SFML](https://www.sfml-dev.org/) - SFML is a C++ library whish allows graphic for c++
+ >   * We will be using C++ 
  > * What will be the input/output of your project?
  >   * The input of our project will be a mouse click on a coordinate box. The output will be a sign of whether the coordinate clicked was correct or not.
  > * What are the three design patterns you will be using. For each design pattern you must:
  >   * Proxy- The proxy design pattern will be useful in our project because we want to check if the user’s input, the mouse click, is correct. The proxy will be able to determine whether the user input is correct or not and will relay this information to another class. When the information is relayed, the class will determine what to do based on if the coordinate the user clicked is right or not. For example, if the coordinate is correct, then a present will be delivered.
+ >   * Visitor - The visitor pattern will fit our project because we want to have a base class which has three subclasses. However, instead of redefining the same functions in all three subclasses we will have a concrete visitor class which will take in one of the three subclasses and perform the operation on that subclass. This will simplify our design and help prevent us from writing redundant code. 
  > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
 
  > ## Phase II
