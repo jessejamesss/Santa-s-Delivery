@@ -28,7 +28,9 @@
  > * What are the three design patterns you will be using. For each design pattern you must:
  >   * Proxy- The proxy design pattern will be useful in our project because we want to check if the user’s input, the mouse click, is correct. The proxy will be able to determine whether the user input is correct or not and will relay this information to another class. When the information is relayed, the class will determine what to do based on if the coordinate the user clicked is right or not. For example, if the coordinate is correct, then a present will be delivered.
  >   * Visitor - The visitor pattern will fit our project because we want to have a base class which has three subclasses. However, instead of redefining the same functions in all three subclasses we will have a concrete visitor class which will take in one of the three subclasses and perform the operation on that subclass. This will simplify our design and help prevent us from writing redundant code. 
- > * This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
+ > * Strategy: The strategy pattern will be useful for our project because it will allow us to use virtual and pure virtual functions. We plan on using these functions in our neighborhood classes, as they all need to be implemented differently. This fits perfectly with the strategy design pattern, as it allows us to make objects interchangeable inside the original context object. This will allow us to simplify our base class and made our code cleaner.
+
+ This description should be in enough detail that the TA/instructor can determine the complexity of the project and if it is sufficient for the team members to complete in the time allotted. 
 
  > ## Phase II
  > In addition to completing the "Class Diagram" section below, you will need to 
