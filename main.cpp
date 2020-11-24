@@ -81,7 +81,7 @@ main(){
     	
 	//set blocks
 	player_two->setBlocks(); // will give options to set all the different blocks
-        mainBoardTwo->update(player_Two.getGrid()); // shows where houses are located`	
+        mainBoardTwo->update(player_two.getGrid()); // shows where houses are located`	
 
 	//update visitor vector
 	neighborhoods.push_back(player_one); 
@@ -97,26 +97,84 @@ main(){
 	//	cin >> enter; 
 		
 		playerOneWindow->draw(); 
-		char x = player_one.getXCoordinate(); // gets an x coordinate from the player
-		int y = player_one.getYCoordinate(); // gets a y coordinate from the player 
+		int x = player_one.getXCoordinate(); // gets an x coordinate from the player
+		char y = player_one.getYCoordinate(); // gets a y coordinate from the player 
 		bool check = player_two.checkBounds(x,y);//checks if the coordinates are valid 
 		if(check == true)
 		{
+	//player one's turn
+		    if(player_two->getAttempts() > 0){
 			int value_two = player_two.retrieveCoordinate(x,y); //gets the value at those coordinates from palyer two
 			
-			// if the value is less than 30 then these are points
-			if(value <= 30){ 
-				player_one.addPoints(value_two); //check with AJ
+			// if the value is a miss
+			if(value_two == -1){
+				player_two->miss(x, y); // needs to update the grid of player_two
+                                attemptsBoardOne->update(player_two.getGrid());
 			}
-                      	if(value == 40){ //if the value equals the bonus coordinate value (check with AJ) 
+			// if the value is less than 30 then these are points
+			if(value_two <= 30){ 
+				player_one->addPoints(value_two); //check with AJ
+				player_two->hit(x, y); // needs to update the grid of player_two
+				attemptsBoardOne->update(player_two.getGrid());
+				pointsGraphicOne->update(player_one.getPoints());  
+			}
+			//if the value equals the bonus coordinate value (check with AJ) 
+                      	if(value_two == 40){ 
 				for(int i = 0; i < neighborhoods.size(); ++i){ 
 					Neighborhoods.at(i)->accept(new AddBonus());  
 				}
+			}
+			//if the value is Skip Turn
+			if(value_two == 50){
+				player_one->setStrategyFunction(new SkipTurn()); //player_one or two??
+				player_one->editGameState();
+						 
+			}
+			//if the value is AutoWin
+			if(value_two == 60){
+                                player_one->setStrategyFunction(new AutoWin());
+                                player_one->editGameState();
+                        }
+			
+			playerOneWindow->draw(); 
+		     }
 
-			if(value ==   
-		} 
+	//player two's turn 
+		   if(player_two->getAttempts() > 0){
+			int value_one = player_one.retrieveCoordinate(x,y); //gets the value at those coordinates from palyer two
+                        
+			 if(value_one == -1){
+                                player_one->miss(x, y); // needs to update the grid of player_two
+                                attemptsBoardTwo->update(player_one->getGrid());
+                        }
 
-		********* Repeat for player two *********
+			if(value_one <= 30){
+                                player_two->addPoints(value_one); //check with AJ
+                                player_one->hit(x, y); // needs to update the grid of player_two
+                                attemptsBoardTwo->update(player_two.getGrid());
+                                pointsGraphicTwo->update(player_two.getPoints());
+                        }
 
+
+			if(value_one == 40){
+                                for(int i = 0; i < neighborhoods.size(); ++i){
+                                        Neighborhoods.at(i)->accept(new AddBonus());
+                                }
+                        }
+
+			if(value_one == 50){
+                                player_two->setStrategyFunction(new SkipTurn()); //player_one or two??
+                                player_two->editGameState();
+				player_two->setAttempts(0); 
+				attemptsGraphicTwo->update(); 			
+                        }
+
+			if(value_one == 60){
+                                player_two->setStrategyFunction(new AutoWin());
+                                player_two->editGameState();
+                        }
+			
+			playerTwoWindow->draw(); 		
+	           }
 	}
 }	
