@@ -1,3 +1,5 @@
+#ifndef __NIGHTMARE_H__
+#define __NIGHTMARE_H__
 #include "Neighborhood.h"
 #include <iostream>
 #include <stdio.h>
@@ -47,5 +49,5 @@ class Nightmare : public Neighborhood {
         
 
 };
-#endif
+#endif /* Nightmare_h */
 
