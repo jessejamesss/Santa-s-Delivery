@@ -1,50 +1,43 @@
-#ifndef WONDERLAND.H
-#define WONDERLAND.H
-
 #include "Neighborhood.h"
 #include <iostream>
 #include <stdio.h>
 #include <ctype.h>
-using namespace std;
-
 class Wonderland : public Neighborhood {
     public:
-        void accept(Vistor* v);
+        Wonderland();
         int getGrid();
         int retrieveCoordinate(char x, int y);
         char getXCoordinate();
         int getYCoordinate();
         void setBlocks();
         int getPoints();
-        void setPoints(int points);
-        string getTheme();
+        void addPoints(int points);
+        std::string getTheme();
         bool checkValidity(char x, int y);
         bool getGameOver();
-        void setTheme(string name);
+        void setTheme(std::string name);
         
 
     private:
-        int points = 0;
-        string theme;
-        int [6][6]grid = {{-1,-1,-1,-1,-1,-1},
+        int points;
+        std::string theme;
+        int grid[6][6] = {{-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1}}
-        Vistor* vistor;
-        Strategy* strategy;
+                          {-1,-1,-1,-1,-1,-1}};
         bool gameOver;
         char coordinateX;
         int coordinateY;
-        char bonusCoordinateX;
-        int bonusCoordinateY;
-        int attempts = 1;
+        int attempts;
         void twoNeighborhoods();
         void threeNeighborhoods();
-        void fourNeighborhoods();
         void setPoint();
-        bool checkValidNeighbors(int x, int y);
+        bool check2ValidNeighbors(char x, int y, char z, int zz);
+        bool check3ValidNeighbors(char x, int y, char z, int zz, char x1, int x2);
+        char setXCoord(); // implement later
+        int setYCoord(); // implement later
         
 
 };
