@@ -6,9 +6,19 @@
 using namespace std;
 
 class AttemptsBoard : public Graphics {
+private:
+    string grid[6][6] = {{"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"}};
 public:
+    AttemptsBoard();
     void drawBoard();
-    void update(int* grid);
+    void updateBoard(int** newGrid);
+    void updatePoints(int newPoints);
+    void updateAttempts(int newAttempts);
 
 };
 

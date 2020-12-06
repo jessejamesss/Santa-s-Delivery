@@ -10,9 +10,12 @@ using namespace std;
 class Graphics {
 
 public:
-
-	virtual void drawBoard() = 0;
-	
+    virtual void drawBoard() = 0;
+    virtual void updateBoard(int** newGrid) = 0;
+    virtual void updatePoints(int newPoints) = 0;
+    virtual void updateAttempts(int newAttempts) = 0;
+    
+    
 };
 
-#endif //__GRAPHICS_H__ 
+#endif //__GRAPHICS_H__

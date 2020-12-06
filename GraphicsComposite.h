@@ -11,6 +11,9 @@ private:
 public:
     void drawBoard();
     void add(Graphics*);
+    void updateBoard(int** newGrid);
+    void updatePoints(int newPoints);
+    void updateAttempts(int newAttempts);
     
 };
 
