@@ -4,8 +4,7 @@ void Wonderland::accept(Vistor* v){
     vistor = v;
 }
 
-int* Wonderland::getGrid(){
-}
+int Wonderland::(&getGrid())[6][6] { return tempGrid; }
 
 int Wonderland::retrieveCoordinate(char x, int y){
     int index = x - 'a';
