@@ -1,14 +1,20 @@
 #ifndef __NIGHTMARE_H__
 #define __NIGHTMARE_H__
-#include "Neighborhood.h"
 #include <iostream>
 #include <stdio.h>
 #include <ctype.h>
+#include "visitor.hpp"
+
+
+class Visitor;
+
+#include "Neighborhood.h"
 
 class Nightmare : public Neighborhood {
     public:
         Nightmare();
-        int getGrid();
+        ~Nightmare();
+	int** getGrid(); 
         int retrieveCoordinate(char x, int y);
         char getXCoordinate();
         int getYCoordinate();
@@ -17,22 +23,26 @@ class Nightmare : public Neighborhood {
         void setBlocks();
         int getPoints();
         void addPoints(int x);
-        void setPoints(int points);
+        void setPoints(char x, int index2, int type);
         std::string getTheme();
         bool checkValidity(char x, int y);
         bool getGameOver();
-        void setTheme(std::string name);
-        
-
+        int getBonusCoordinateX();
+        int getBonusCoordinateY(); 
+	void setBonusCoordinateX(int);
+        void setBonusCoordinateY(int);
+	void accept(Visitor* v); 
+	void setAttempts(int x);
     private:
         int points;
         std::string theme;
-        int grid[6][6] = {{-1,-1,-1,-1,-1,-1},
+        /*int grid[6][6] = {{-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1}};
+                          {-1,-1,-1,-1,-1,-1}};*/
+        int** grid; 
         bool gameOver;
         char coordinateX;
         int coordinateY;
@@ -41,11 +51,10 @@ class Nightmare : public Neighborhood {
         int attempts;
         void twoNeighborhoods();
         void threeNeighborhoods();
-        void setPoint();
         bool check2ValidNeighbors(char x, int y, char z, int zz);
         bool check3ValidNeighbors(char x, int y, char z, int zz, char x1, int x2);
-        char setXCoord(); // implement later
-        int setYCoord(); // implement later
+        //char setXCoord(); // implement later
+        //int setYCoord(); // implement later
         
 
 };

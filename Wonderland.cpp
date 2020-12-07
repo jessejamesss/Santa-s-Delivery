@@ -6,13 +6,57 @@ Wonderland::Wonderland(){
     theme = "Wonderland";
     attempts = 1;
     gameOver = false;
+    BonusCoordinateX = 0; 
+    BonusCoordinateY = 0; 
+
+   grid = new int*[6];    
+          int val = 0;
+          for(int i = 0; i < 6; ++i)
+          {
+              grid[i] = new int[6];
+              for(int j = 0; j < 6; ++j)
+              {
+                      ++val;
+                      grid[i][j] = -1;
+               }
+           }
 }
-int Wonderland::(&getGrid())[6][6] { return tempGrid; }
+
+void Wonderland::accept(Visitor* v){
+	v->visitWonderland(this);
+}
+void Wonderland::setAttempts(int x){
+        attempts = x;
+}
+
+void Wonderland::setBonusCoordinateX(int row){
+	BonusCoordinateX = row; 
+}
+
+void Wonderland::setBonusCoordinateY(int col){
+	BonusCoordinateY = col; 
+}
+
+Wonderland::~Wonderland(){delete []grid;}
+
+int** Wonderland::getGrid(){
+
+       return grid;
+}
+
+int Wonderland::getBonusCoordinateX(){
+	return BonusCoordinateX; 	
+}
+
+int Wonderland::getBonusCoordinateY(){
+	return BonusCoordinateY; 
+}
 
 int Wonderland::retrieveCoordinate(char x, int y){
     int index = x - 'a';
     return grid[index][y];
 }
+
 int Wonderland::getPoints(){
     return points;
 }
@@ -25,9 +69,6 @@ int Wonderland::getYCoordinate(){
     return coordinateY;
 }
 
-void Wonderland::addPoints(int pts){
-    points += pts;
-}
 
 void Wonderland::addPoints(int addPts){
     points += addPts;
@@ -48,36 +89,34 @@ bool Wonderland::checkValidity(char x, int index2){   // ADD CHECK FOR BOUNDS!!!
 }
 
 bool Wonderland::getGameOver(){
+	return false; 
 }
 
 
-void Wonderland::setBlocks(){
 
-    twoWonderlands(); // 3
-    threeWonderlands();
-}
-void Wonderland::setPoint(char x, int index2, int type){
+void Wonderland::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
     grid[index1][index2] = type;
 }
 
-void Wonderland::twoWonderlands() {
+void Wonderland::twoNeighborhoods() {
     char row1, row2;
     int column1, column2;
     bool satisfied = false;
-    char coordinatRow1;
+    char coordinateRow1;
     int coordinateCol1;
     char coordinateRow2;
     int coordinateCol2;
     bool valid = false;
+    int counter = 0; 
 
     while(valid == false){
-        cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Wonderland of 2 (A-F) ";
+        cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Wonderland of 2 (A-F)\n";
         while(satisfied == false){
-            cin << row1;
+            cin >> row1;
             row1 = tolower(row1);
             if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
-                coordinatRow1 = row1;
+                coordinateRow1 = row1;
                 satisfied = true;
             }
             else {
@@ -86,10 +125,10 @@ void Wonderland::twoWonderlands() {
         }
         satisfied = false; // resets the satisfied
 
-        cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5) ";
+        cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin << column1;
+            cin >> column1;
             if(column1 >= 0 && column1 < 6) {
                 coordinateCol1 = column1; // maybe change to one specific variable later
                 satisfied = true;
@@ -102,7 +141,7 @@ void Wonderland::twoWonderlands() {
 
         cout << "\nPlease select a row on the grid where you want to place your second Coordinate for your Wonderland of 2 (A-F)\n";
         while(satisfied == false){
-            cin << row2;
+            cin >> row2;
             row1 = tolower(row2);
             if(row2 == 'a' ||row2 == 'b' ||row2 == 'c' ||row2 == 'd' || row2 == 'e' ||row2 == 'f'){
                 coordinateRow2 = row2;
@@ -117,7 +156,7 @@ void Wonderland::twoWonderlands() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin << column2;
+            cin >> column2;
             if(column2 >= 0 && column2 < 6) {
                 coordinateCol2 = column2;
                 satisfied = true;
@@ -127,11 +166,11 @@ void Wonderland::twoWonderlands() {
             }
         }
         satisfied = false; // resets the satisfied
-
+        
         if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && check2ValidNeighbors(coordinateRow1, coordinateCol1, coordinateRow2, coordinateCol2) == true){
-            setPoint(coordinateRow1, coordinateCol1, 5);
-            setPoint(coordinateRow2, coordinateCol2, 5);
-            counter += 1
+            setPoints(coordinateRow1, coordinateCol1, 5);
+            setPoints(coordinateRow2, coordinateCol2, 5);
+             counter += 1;
             if(counter == 2){
                 valid = true;
             }
@@ -140,8 +179,7 @@ void Wonderland::twoWonderlands() {
             }
         }
         else {
-            cout << "Oops! Looks like one of the points you selected was already taken or not adjacent to the other coordinates. Remember,
-             the coordinates have to be right next to each other on the grid (A1, A2 is valid, but A1, A3 is not). Try again." << endl << endl;
+            cout << "Oops! Looks like one of the points you selected was already taken or not adjacent to the other coordinates. Remember,the coordinates have to be right next to each other on the grid (A1, A2 is valid, but A1, A3 is not). Try again." << endl << endl;
         }
     }
 }
@@ -170,26 +208,27 @@ bool Wonderland::check2ValidNeighbors(char coordrow1, int col1, char coordrow2, 
 
 
 
-void Wonderland::threeWonderlands() {
-    char row1, row2 row3;
+void Wonderland::threeNeighborhoods() {
+    char row1, row2, row3;
     int column1, column2, column3;
     bool satisfied = false;
-    char coordinatRow1;
+    char coordinateRow1;
     int coordinateCol1;
     char coordinateRow2;
     int coordinateCol2;
     char coordinateRow3;
     int coordinateCol3;
+    int counter = 0; 
 
     bool valid = false;
 
     while(valid == false){
         cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Wonderland of 3 (A-F)\n";
         while(satisfied == false){
-            cin << row1;
+            cin >> row1;
             row1 = tolower(row1);
             if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
-                coordinatRow1 = row1;
+                coordinateRow1 = row1;
                 satisfied = true;
             }
             else {
@@ -201,7 +240,7 @@ void Wonderland::threeWonderlands() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin << column1;
+            cin >> column1;
             if(column1 >= 0 && column1 < 6) {
                 coordinateCol1 = column1; // maybe change to one specific variable later
                 satisfied = true;
@@ -214,7 +253,7 @@ void Wonderland::threeWonderlands() {
 
         cout << "\nPlease select a row on the grid where you want to place your second Coordinate for your Wonderland of 3 (A-F)\n";
         while(satisfied == false){
-            cin << row2;
+            cin >> row2;
             row2 = tolower(row2);
             if(row2 == 'a' ||row2 == 'b' ||row2 == 'c' ||row2 == 'd' || row2 == 'e' ||row2 == 'f'){
                 coordinateRow2 = row2;
@@ -229,7 +268,7 @@ void Wonderland::threeWonderlands() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin << column2;
+            cin >> column2;
             if(column2 >= 0 && column2 < 6) {
                 coordinateCol2 = column2;
                 satisfied = true;
@@ -243,7 +282,7 @@ void Wonderland::threeWonderlands() {
         cout << "\nPlease select a row on the grid where you want to place your third Coordinate for your Wonderland of 3 (A-F)\n";
 
         while(satisfied == false){
-            cin << row3;
+            cin >> row3;
             row3 = tolower(row3);
             if(row3 == 'a' ||row3 == 'b' ||row3 == 'c' ||row3 == 'd' || row3 == 'e' ||row3 == 'f'){
                 coordinateRow3 = row3;
@@ -258,7 +297,7 @@ void Wonderland::threeWonderlands() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin << column3;
+            cin >> column3;
             if(column3 >= 0 && column3 < 6) {
                 coordinateCol3 = column3;
                 satisfied = true;
@@ -269,15 +308,15 @@ void Wonderland::threeWonderlands() {
         }
         satisfied = false; // resets the satisfied
 
-        if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true 
+        if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && 
             checkValidity(coordinateRow3, coordinateCol3) == true && 
             check3ValidNeighbors(coordinateRow1, coordinateCol1, coordinateRow2, coordinateCol2, coordinateRow3, coordinateCol3) == true){
 
-            setPoint(coordinateRow1, coordinateCol1, 3);
-            setPoint(coordinateRow2, coordinateCol2, 3);
-            setPoint(coordinateRow3, coordinateCol3, 3);
+            setPoints(coordinateRow1, coordinateCol1, 3);
+            setPoints(coordinateRow2, coordinateCol2, 3);
+            setPoints(coordinateRow3, coordinateCol3, 3);
 
-            counter += 1
+            counter += 1;
             if(counter == 3){
                 valid = true;
                 cout << "All points for this Wonderland have successfully been placed. Let's move on!" << endl << endl;
@@ -287,26 +326,27 @@ void Wonderland::threeWonderlands() {
             }
         }
         else {
-            cout << "Oops! Looks like one of the points you selected was already taken or not adjacent to the other coordinates. Remember,
-             the coordinates have to be right next to each other on the grid (A1, A2 is valid, but A1, A3 is not). Try again." << endl << endl;
+            cout << "Oops! Looks like one of the points you selected was already taken or not adjacent to the other coordinates. Remember, the coordinates have to be right next to each other on the grid (A1, A2 is valid, but A1, A3 is not). Try again." << endl << endl;
         }
     }
 }
 
-bool Wonderland::check3ValidNeighbors(char coordrow1, int col1, char coordrow2, int col2, char coordrow3, int row3){
+void Wonderland::setBlocks(){
+
+    Wonderland::threeNeighborhoods(); // 3
+    Wonderland::threeNeighborhoods();
+
+}
+
+bool Wonderland::check3ValidNeighbors(char coordrow1, int col11, char coordrow2, int col22, char coordrow3, int col33){
     bool vertical = false;
     bool horizontal = false;
     int row1 = coordrow1 - 'a';
     int row2 = coordrow2 - 'a';
     int row3 = coordrow3 - 'a';
-    char row1 = 'b';
-    char row2 = 'd';
-    char row3 = 'c';
-    int col1 = 3;
-    int col2 = 3;
-    int col3 = 3;
-    bool horizontal = false;
-    bool vertical = false;
+    int col1 = col11;
+    int col2 = col22;
+    int col3 = col33;
     
     if(row1 - row2 == 0 && row2 - row3 == 0){
         if((col1 - col2 >= -1 && col1 - col2 <= 1) && (col2 - col3 >= -1 && col2 - col3 <= 1))

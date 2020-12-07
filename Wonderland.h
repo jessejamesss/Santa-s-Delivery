@@ -1,35 +1,48 @@
+#ifndef __WONDERLAND_H__
+#define __WONDERLAND_H__
+
 #include "Neighborhood.h"
 #include <iostream>
 #include <stdio.h>
 #include <ctype.h>
+
 class Wonderland : public Neighborhood {
     public:
         Wonderland();
-        int getGrid();
+        ~Wonderland();
+	int** getGrid();
         int retrieveCoordinate(char x, int y);
         char getXCoordinate();
         int getYCoordinate();
+        char getBonusCoordX();
+        int getBonusCoordY();
         void setBlocks();
         int getPoints();
-        void addPoints(int points);
+        void addPoints(int x);
+        void setPoints(char x, int index2, int type);
         std::string getTheme();
         bool checkValidity(char x, int y);
         bool getGameOver();
-        void setTheme(std::string name);
-        
+        int getBonusCoordinateX();
+        int getBonusCoordinateY(); 
+	void setBonusCoordinateX(int);
+        void setBonusCoordinateY(int);
+	void accept(Visitor* v); 
+        void deductPts();
+        void setAttempts(int x);
+
 
     private:
         int points;
         std::string theme;
-        int grid[6][6] = {{-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1},
-                          {-1,-1,-1,-1,-1,-1}};
+        int** grid; 
         bool gameOver;
         char coordinateX;
         int coordinateY;
+        //Vistor* vistor;
+        //Strategy* strategy;
+	char bonusCoordinateX;
+        int bonusCoordinateY;
         int attempts;
         void twoNeighborhoods();
         void threeNeighborhoods();
