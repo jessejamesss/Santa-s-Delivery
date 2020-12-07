@@ -5,6 +5,11 @@
 #include <iostream>
 #include <stdio.h>
 #include <ctype.h>
+#include "GameState.hpp"
+#include "visitor.hpp"
+
+class Strategy;
+class Visitor;
 
 class Wonderland : public Neighborhood {
     public:
@@ -28,10 +33,11 @@ class Wonderland : public Neighborhood {
 	void setBonusCoordinateX(int);
         void setBonusCoordinateY(int);
 	void accept(Visitor* v); 
-        void deductPts();
+        void deductPoints();
         void setAttempts(int x);
-
-
+	void setGameOver();
+        void setStratCoords();
+	
     private:
         int points;
         std::string theme;
@@ -39,8 +45,8 @@ class Wonderland : public Neighborhood {
         bool gameOver;
         char coordinateX;
         int coordinateY;
-        //Vistor* vistor;
-        //Strategy* strategy;
+        Visitor* visitor;
+        Strategy* strategy;
 	char bonusCoordinateX;
         int bonusCoordinateY;
         int attempts;

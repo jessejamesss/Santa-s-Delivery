@@ -28,7 +28,14 @@ void Wonderland::accept(Visitor* v){
 void Wonderland::setAttempts(int x){
         attempts = x;
 }
+void Wonderland::setGameOver(){
+	gameOver = true;
+}
+void Wonderland::deductPoints(){
+	points = points - 3;
+	attempts += 1;
 
+}
 void Wonderland::setBonusCoordinateX(int row){
 	BonusCoordinateX = row; 
 }
@@ -37,6 +44,31 @@ void Wonderland::setBonusCoordinateY(int col){
 	BonusCoordinateY = col; 
 }
 
+void Wonderland::setStratCoords(){
+    bool empty =  false;
+    int xCoord;
+    int yCoord;
+
+    while(empty != true){ 
+        xCoord = rand() % 5;
+        yCoord = rand() % 5;
+        if(grid[xCoord][yCoord] == -1){
+            empty = true;
+            grid[xCoord][yCoord] = 50;
+        }
+    }
+    
+    empty = false;
+    while(empty != true) { 
+        xCoord = rand() % 5;
+        yCoord = rand() % 5;
+        if(grid[xCoord][yCoord] == -1){
+            empty = true;
+            grid[xCoord][yCoord] = 60;
+        }
+    }
+
+}
 Wonderland::~Wonderland(){delete []grid;}
 
 int** Wonderland::getGrid(){
@@ -331,12 +363,6 @@ void Wonderland::threeNeighborhoods() {
     }
 }
 
-void Wonderland::setBlocks(){
-
-    Wonderland::threeNeighborhoods(); // 3
-    Wonderland::threeNeighborhoods();
-
-}
 
 bool Wonderland::check3ValidNeighbors(char coordrow1, int col11, char coordrow2, int col22, char coordrow3, int col33){
     bool vertical = false;
@@ -362,5 +388,11 @@ bool Wonderland::check3ValidNeighbors(char coordrow1, int col11, char coordrow2,
     }
     return false;
     
+}
+void Wonderland::setBlocks(){
+
+    twoNeighborhoods(); // 3
+    threeNeighborhoods();
+    setStratCoords();
 }
 

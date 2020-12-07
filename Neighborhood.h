@@ -32,6 +32,9 @@ class Neighborhood {
 	virtual void setBonusCoordinateY(int) = 0; 
 	virtual void accept(Visitor* v) = 0; 
 	virtual void setAttempts(int x) = 0;
+	virtual void setGameOver() = 0;
+	virtual void setStratCoords() = 0;
+
     protected:
         int points;
         std::string theme;

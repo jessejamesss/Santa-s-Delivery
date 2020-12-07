@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <ctype.h>
 #include "visitor.hpp"
+#include "GameState.hpp"
 
-
+class Strategy;
 class Visitor;
 
 #include "Neighborhood.h"
@@ -33,6 +34,8 @@ class Nightmare : public Neighborhood {
         void setBonusCoordinateY(int);
 	void accept(Visitor* v); 
 	void setAttempts(int x);
+        void setGameOver();
+	void setStratCoords();
     private:
         int points;
         std::string theme;
@@ -42,7 +45,9 @@ class Nightmare : public Neighborhood {
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1},
                           {-1,-1,-1,-1,-1,-1}};*/
-        int** grid; 
+        Strategy* s;
+	Visitor* v;
+	int** grid; 
         bool gameOver;
         char coordinateX;
         int coordinateY;

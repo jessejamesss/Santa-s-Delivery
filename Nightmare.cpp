@@ -30,6 +30,9 @@ void Nightmare::accept(Visitor* v){
 void Nightmare::setAttempts(int x){
 	attempts = x;
 }
+void Nightmare::setGameOver(){
+	gameOver = true;
+}
 
 void Nightmare::setBonusCoordinateX(int row){
 	BonusCoordinateX = row; 
@@ -37,6 +40,31 @@ void Nightmare::setBonusCoordinateX(int row){
 
 void Nightmare::setBonusCoordinateY(int col){
 	BonusCoordinateY = col; 
+}
+void Nightmare::setStratCoords(){
+    bool empty =  false;
+    int xCoord;
+    int yCoord;
+
+    while(empty != true){ 
+        xCoord = rand() % 5;
+        yCoord = rand() % 5;
+        if(grid[xCoord][yCoord] == -1){
+            empty = true;
+            grid[xCoord][yCoord] = 50;
+        }
+    }
+
+    empty = false;
+    while(empty != true) {
+        xCoord = rand() % 5;
+        yCoord = rand() % 5;
+        if(grid[xCoord][yCoord] == -1){
+            empty = true;
+            grid[xCoord][yCoord] = 60;
+        }
+    }
+
 }
 
 Nightmare::~Nightmare(){delete []grid;}
@@ -174,13 +202,16 @@ void Nightmare::twoNeighborhoods() {
         if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && check2ValidNeighbors(coordinateRow1, coordinateCol1, coordinateRow2, coordinateCol2) == true){
             setPoints(coordinateRow1, coordinateCol1, 5);
             setPoints(coordinateRow2, coordinateCol2, 5);
-             counter += 1;
-            if(counter == 2){
-                valid = true;
-            }
-            else {
-                cout << "Point set successfully! Let's set the next point!" << endl << endl;
-            }
+            valid = true;
+	    cout << "Neighborhood set successfully! Let's set the next points!" << endl << endl;
+ 
+	   // counter += 1;
+           // if(counter == 2){
+           //     valid = true;
+           // }
+           // else {
+            //    cout << "Point set successfully! Let's set the next point!" << endl << endl;
+           // }
         }
         else {
             cout << "Oops! Looks like one of the points you selected was already taken or not adjacent to the other coordinates. Remember,the coordinates have to be right next to each other on the grid (A1, A2 is valid, but A1, A3 is not). Try again." << endl << endl;
@@ -195,13 +226,15 @@ bool Nightmare::check2ValidNeighbors(char coordrow1, int col1, char coordrow2, i
     bool horizontal = false;
     int row1 = coordrow1 - 'a';
     int row2 = coordrow2 - 'a';
-    
-    if(row1 - row2 == 0){
+   
+    if(row1 - row2 == 0 && (col1 - col2 >= -1 && col1 - col2 <= 1)){
         horizontal = true;
     }
-    if(col1 - col2 == 0) {
+    
+    if(col1 - col2 == 0 && (row1 - row2 >= -1 && row1 - row2 <= 1)) {
         vertical = true;
     }
+
     
     if(horizontal == true && vertical == false || vertical == true && horizontal == false){
         return true;
@@ -319,15 +352,17 @@ void Nightmare::threeNeighborhoods() {
             setPoints(coordinateRow1, coordinateCol1, 3);
             setPoints(coordinateRow2, coordinateCol2, 3);
             setPoints(coordinateRow3, coordinateCol3, 3);
+            valid = true;
+	    cout << "Neighborhood set successfully! Let's set the next points!" << endl << endl;
 
-            counter += 1;
-            if(counter == 3){
-                valid = true;
-                cout << "All points for this Nightmare have successfully been placed. Let's move on!" << endl << endl;
-            }
-            else {
-                cout << "Point set successfully! Let's set the next point!" << endl << endl;
-            }
+           // counter += 1;
+           // if(counter == 3){
+            //    valid = true;
+            //    cout << "All points for this Nightmare have successfully been placed. Let's move on!" << endl << endl;
+           // }
+           // else {
+           //     cout << "Point set successfully! Let's set the next point!" << endl << endl;
+           // }
         }
         else {
             cout << "Oops! Looks like one of the points you selected was already taken or not adjacent to the other coordinates. Remember, the coordinates have to be right next to each other on the grid (A1, A2 is valid, but A1, A3 is not). Try again." << endl << endl;
@@ -335,12 +370,8 @@ void Nightmare::threeNeighborhoods() {
     }
 }
 
-void Nightmare::setBlocks(){
 
-    Nightmare::threeNeighborhoods(); // 3
-    Nightmare::threeNeighborhoods();
 
-}
 
 bool Nightmare::check3ValidNeighbors(char coordrow1, int col11, char coordrow2, int col22, char coordrow3, int col33){
     bool vertical = false;
@@ -367,4 +398,9 @@ bool Nightmare::check3ValidNeighbors(char coordrow1, int col11, char coordrow2, 
     return false;
     
 }
+void Nightmare::setBlocks(){
 
+    twoNeighborhoods(); // 3
+    threeNeighborhoods();
+    setStratCoords();	
+}
