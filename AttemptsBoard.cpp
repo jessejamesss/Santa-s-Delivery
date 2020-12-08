@@ -4,7 +4,7 @@ AttemptsBoard::AttemptsBoard() { }
 
 void AttemptsBoard::drawBoard() {
     char x = 'A';
-    cout << "   1   2   3   4   5   6" << endl;
+    cout << "   0   1   2   3   4   5" << endl;
     for (int i = 0; i < 6; i ++){
         cout << x << " ";
         x++;
