@@ -1,5 +1,6 @@
 #include "Nightmare.h"
 //#include "Neighborhood.h"
+#include <ctype.h>
 
 using namespace std;
 
@@ -23,6 +24,8 @@ Nightmare::Nightmare(){
                }
            }
 }
+
+
 void Nightmare::accept(Visitor* v){
 	v->visitNightmare(this);
 }
@@ -216,7 +219,7 @@ void Nightmare::twoNeighborhoods() {
     int counter = 0; 
     char temp;
     while(valid == false){
-        cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 2 (A-F)\n";
+       cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 2 (A-F)\n";
         while(satisfied == false){
             cin >> row1;
 	    if(checkRow(row1) == true){
@@ -285,6 +288,37 @@ void Nightmare::twoNeighborhoods() {
             }
         }
         satisfied = false; // resets the satisfied
+
+	//************my code ***********
+	/*cout << "please enter coordinate, such as a1-a2 no spaces" << endl; 
+	string str; 
+	cin >> str; 
+	for(int i = 0; i < str.size(); ++i){
+		cout << "SIZE " << str.size() << endl; 
+		char temp = str.at(i);
+		cout << "TEMP " << i << " " << temp << endl; 
+	     if(i == 0 || i == 3){ 
+		if(temp >= 97 && temp <= 102){
+			cout << "Insde char loop " << i << endl; 
+			temp = tolower(temp); 
+			if(i == 0){coordinateRow1 = temp;}
+			if(i == 3){coordinateRow2 = temp;} 	
+		}
+		else cout << "ERROR: Try again" << endl; 
+	     }
+	     if(i == 1 || i == 4){
+		temp = temp - '0';
+		cout << "Insde num loop " << i << endl; 
+		if (temp >=1 && temp <= 5){
+		    if(i == 1){coordinateCol1 = temp;}
+		    if(i == 4){coordinateCol2 = temp;} 	
+		}
+		else cout << "ERROR: Try again" << endl; 
+	     }
+	}	
+
+	cout << "DONE *******" << endl; 
+	// ********* end my code *********/
         
         if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && check2ValidNeighbors(coordinateRow1, coordinateCol1, coordinateRow2, coordinateCol2) == true){
             setPoints(coordinateRow1, coordinateCol1, 5);
@@ -475,7 +509,27 @@ void Nightmare::threeNeighborhoods() {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
         }
-        satisfied = false; // resets the satisfied
+        satisfied = false; // resets the satisfied*/
+
+	/*cout << "THREE : please enter coordinate, such as a1-a2 no spaces" << endl;
+        string str;
+        cin >> str;
+	
+	if(str.at(1) == str.at(4)){
+		coordinateCol1 = str.at(1) - '0'; 
+		coordinateCol2 = str.at(1) - '0'; 
+		coordinateCol3 = str.at(1) - '0';
+		char temp = tolower(str.at(0)); 
+		for(int i = 0; i < 4; ++i){
+			if(i == 0){coordinateRow1 = temp;}
+			if(i == 1){coordinateRow2 = temp;}
+			if(i == 2){coordinateRow3 = temp;}
+			temp += 1; 
+			cout << "TEMP THREE " << temp << endl; 
+		}
+	}
+	
+        cout << "DONE *******" << endl;*/
 
         if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && 
             checkValidity(coordinateRow3, coordinateCol3) == true && 

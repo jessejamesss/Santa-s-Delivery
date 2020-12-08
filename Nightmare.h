@@ -42,7 +42,7 @@ class Nightmare : public Neighborhood {
         int getAttempts();
         void miss(char, int);
         void hit(char, int);
-        void editGameState(Neighborhood*);
+        void editGameState();
         void setName(std::string);
         std::string getName();
         void setStratFunction(GameState*);
