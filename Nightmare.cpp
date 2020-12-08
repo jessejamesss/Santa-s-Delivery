@@ -178,8 +178,27 @@ bool Nightmare::getGameOver(){
 	return false; 
 }
 
+bool Nightmare::checkRow(char row1){
 
+   row1 = tolower(row1);
+   if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
+      return true;
+   }
+   return false;
 
+}
+
+bool Nightmare::checkCol(char col){
+   
+   if(isdigit(col) == true) {
+       col = col - '0';
+       if(col >= 0 && col < 6) {
+	  return true;
+	}
+   }
+   return false;
+
+}
 void Nightmare::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
     grid[index1][index2] = type;
@@ -200,11 +219,16 @@ void Nightmare::twoNeighborhoods() {
         cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 2 (A-F)\n";
         while(satisfied == false){
             cin >> row1;
-            row1 = tolower(row1);
-            if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
-                coordinateRow1 = row1;
+	    if(checkRow(row1) == true){
+		coordinateRow1 = row1;
                 satisfied = true;
-            }
+       //
+	    }
+ //           row1 = tolower(row1);
+   //         if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
+     //           coordinateRow1 = row1;
+       //         satisfied = true;
+           
             else {
                 cout << "\nThat is not a valid row. Please select a row between the letters A - F\n";
             }
@@ -215,12 +239,13 @@ void Nightmare::twoNeighborhoods() {
         
         while(satisfied == false){
             cin >> temp;
-	    if(isdigit(temp) == true) {
-		column1 = temp - '0';
-           	 if(column1 >= 0 && column1 < 6) {
-                	coordinateCol1 = column1; // maybe change to one specific variable later
-                	satisfied = true;
-           	 }
+	   // if(isdigit(temp) == true) {
+		//column1 = temp - '0';
+           	 //if(column1 >= 0 && column1 < 6)
+            if(checkCol(temp) == true) {
+		 temp = temp - '0';
+                 coordinateCol1 = temp; // maybe change to one specific variable later
+                 satisfied = true;
             }
 	    else {
               	cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
@@ -231,9 +256,10 @@ void Nightmare::twoNeighborhoods() {
         cout << "\nPlease select a row on the grid where you want to place your second Coordinate for your Nightmare of 2 (A-F)\n";
         while(satisfied == false){
             cin >> row2;
-            row1 = tolower(row2);
-            if(row2 == 'a' ||row2 == 'b' ||row2 == 'c' ||row2 == 'd' || row2 == 'e' ||row2 == 'f'){
-                coordinateRow2 = row2;
+            //row2 = tolower(row2);
+           // if(row2 == 'a' ||row2 == 'b' ||row2 == 'c' ||row2 == 'd' || row2 == 'e' ||row2 == 'f'){
+            if(checkRow(row2) == true){ 
+		 coordinateRow2 = row2;
                 satisfied = true;
             }
             else {
@@ -246,13 +272,14 @@ void Nightmare::twoNeighborhoods() {
         
         while(satisfied == false){
             cin >> temp;
-            if(isdigit(temp) == true) {
-                column2 = temp - '0';
-           	if(column2 >= 0 && column2 < 6) {
-               	   coordinateCol2 = column2;
+           // if(isdigit(temp) == true) {
+             //   column2 = temp - '0';
+           //	if(column2 >= 0 && column2 < 6) {
+            if(checkCol(temp) == true){
+		   temp = temp - '0';  
+            	   coordinateCol2 = temp;
                    satisfied = true;
-            	}
-	   }
+            }
             else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
@@ -266,7 +293,8 @@ void Nightmare::twoNeighborhoods() {
 	    cout << "Neighborhood set successfully! Let's set the next points!" << endl << endl;
  
 	   // counter += 1;
-           // if(counter == 2){
+         
+  // if(counter == 2){
            //     valid = true;
            // }
            // else {
@@ -323,11 +351,17 @@ void Nightmare::threeNeighborhoods() {
         cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 3 (A-F)\n";
         while(satisfied == false){
             cin >> row1;
-            row1 = tolower(row1);
-            if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
+           // row1 = tolower(row1);
+            //if(row1 == 'a' ||row1 == 'b' ||row1 == 'c' ||row1 == 'd' || row1 == 'e' ||row1 == 'f'){
+            if(checkRow(row1) == true){
                 coordinateRow1 = row1;
                 satisfied = true;
-            }
+	    }
+       //
+       //            }
+       //
+	//	coordinateRow1 = row1;
+        //        satisfied = true;
             else {
                 cout << "\nThat is not a valid row. Please select a row between the letters A - F\n";
             }
@@ -338,13 +372,18 @@ void Nightmare::threeNeighborhoods() {
         
         while(satisfied == false){
             cin >> temp;
-            if(isdigit(temp) == true) {
-                column1 = temp - '0';
-            	if(column1 >= 0 && column1 < 6) {
-                coordinateCol1 = column1; // maybe change to one specific variable later
-                satisfied = true;
-            	}
-	    }
+            if(checkCol(temp) == true){
+                   temp = temp - '0';
+                   coordinateCol1 = temp;
+                   satisfied = true;
+            }
+           // if(isdigit(temp) == true) {
+             //   column1 = temp - '0';
+            //	if(column1 >= 0 && column1 < 6) {
+               // coordinateCol1 = column1; // maybe change to one specific variable later
+              //  satisfied = true;
+            //	}
+	   // }
             else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
@@ -354,11 +393,18 @@ void Nightmare::threeNeighborhoods() {
         cout << "\nPlease select a row on the grid where you want to place your second Coordinate for your Nightmare of 3 (A-F)\n";
         while(satisfied == false){
             cin >> row2;
-            row2 = tolower(row2);
-            if(row2 == 'a' ||row2 == 'b' ||row2 == 'c' ||row2 == 'd' || row2 == 'e' ||row2 == 'f'){
+         //   row2 = tolower(row2);
+           // if(row2 == 'a' ||row2 == 'b' ||row2 == 'c' ||row2 == 'd' || row2 == 'e' ||row2 == 'f'){
+            if(checkRow(row2) == true){
                 coordinateRow2 = row2;
                 satisfied = true;
-            }
+	     }
+       //
+       //            }
+       //
+		//coordinateRow2 = row2;
+               // satisfied = true;
+           // }
             else {
                 cout << "\nThat is not a valid row. Please select a row between the letters A - F\n";
             }
@@ -369,13 +415,18 @@ void Nightmare::threeNeighborhoods() {
         
         while(satisfied == false){
             cin >> temp;
-            if(isdigit(temp) == true) {
-                column2 = temp - '0';
-                if(column2 >= 0 && column2 < 6) {
-               	    coordinateCol2 = column2;
-                    satisfied = true;
-    	        }
+            if(checkCol(temp) == true){
+                   temp = temp - '0';
+                   coordinateCol2 = temp;
+                   satisfied = true;
             }
+           // if(isdigit(temp) == true) {
+               // column2 = temp - '0';
+               // if(column2 >= 0 && column2 < 6) {
+               //	    coordinateCol2 = column2;
+              //      satisfied = true;
+    	     //   }
+           // }
 	    else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
@@ -386,11 +437,17 @@ void Nightmare::threeNeighborhoods() {
 
         while(satisfied == false){
             cin >> row3;
-            row3 = tolower(row3);
-            if(row3 == 'a' ||row3 == 'b' ||row3 == 'c' ||row3 == 'd' || row3 == 'e' ||row3 == 'f'){
+            if(checkRow(row3) == true){
                 coordinateRow3 = row3;
                 satisfied = true;
-            }
+   	   }
+       //            }
+       //
+         //   row3 = tolower(row3);
+           // if(row3 == 'a' ||row3 == 'b' ||row3 == 'c' ||row3 == 'd' || row3 == 'e' ||row3 == 'f'){
+               // coordinateRow3 = row3;
+               // satisfied = true;
+           // }
             else {
                 cout << "\nThat is not a valid row. Please select a row between the letters A - F\n";
             }
@@ -401,13 +458,19 @@ void Nightmare::threeNeighborhoods() {
         
         while(satisfied == false){
             cin >> temp;
-            if(isdigit(temp) == true) {
-                column3 = temp - '0';
-                if(column3 >= 0 && column3 < 6) {
-                     coordinateCol3 = column3;
-                     satisfied = true;
-                 }
-	   } 
+            if(checkCol(temp) == true){
+                   temp = temp - '0';
+                   coordinateCol3 = temp;
+                   satisfied = true;
+            }
+
+            //if(isdigit(temp) == true) {
+               // column3 = temp - '0';
+              //  if(column3 >= 0 && column3 < 6) {
+             //        coordinateCol3 = column3;
+            //         satisfied = true;
+           //      }
+	  // } 
             else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }

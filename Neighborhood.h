@@ -41,6 +41,9 @@ class Neighborhood {
 	virtual void setName(std::string) = 0;
 	virtual std::string getName() = 0;
 	virtual void setStratFunction(GameState* s) = 0;
+	virtual bool checkRow(char) = 0;
+        virtual bool checkCol(char) = 0;
+
     protected:
         int points;
         std::string theme;

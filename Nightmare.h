@@ -45,7 +45,9 @@ class Nightmare : public Neighborhood {
         void editGameState(Neighborhood*);
         void setName(std::string);
         std::string getName();
-        void setStratFunction(GameState*); 
+        void setStratFunction(GameState*);
+	bool checkRow(char);
+	bool checkCol(char); 
    private:
         int points;
         std::string theme;
@@ -71,7 +73,7 @@ class Nightmare : public Neighborhood {
         //char setXCoord(); // implement later
         //int setYCoord(); // implement later
         std::string name;
- 
+ 	
 
 };
 #endif /* Nightmare_h */
