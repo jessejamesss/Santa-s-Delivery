@@ -5,7 +5,6 @@
 
 GameOver::GameOver(){}
 
-GameOver::GameOver(Neighborhood* n){}
+GameOver::GameOver(Neighborhood* n){
    n->setGameOver();
-}
-~    
+}    
