@@ -5,6 +5,6 @@
 
 GameOver::GameOver(){}
 
-GameOver::GameOver(Neighborhood* n){
+void GameOver::editGameState(Neighborhood* n){
    n->setGameOver();
 }    

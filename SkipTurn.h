@@ -7,5 +7,5 @@ class SkipTurn : public GameState {
     public:
         SkipTurn();
         virtual void editGameState(Neighborhood* n);
-}
+};
 #endif

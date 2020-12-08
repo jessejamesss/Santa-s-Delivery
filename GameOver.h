@@ -7,6 +7,6 @@ class GameOver : public GameState {
     public:
         GameOver();
         virtual void editGameState(Neighborhood* n);
-}
+};
 #endif
 
