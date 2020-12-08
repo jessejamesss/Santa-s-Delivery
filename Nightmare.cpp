@@ -42,7 +42,7 @@ void Nightmare::setBonusCoordinateY(int col){
 	BonusCoordinateY = col; 
 }
 
-void Nightmare::setStratFunction(Strategy* strat) {
+void Nightmare::setStratFunction(GameState* strat) {
     s = strat;
 }
 
@@ -94,9 +94,32 @@ void Nightmare::setStratCoords(){
             grid[xCoord][yCoord] = 70;
         }
     }
+}
 
+int Nightmare::getAttempts(){
+   return attempts;
+}
+
+
+void Nightmare::miss(char x, int col){
+   int row = x - '0';
+   grid[row][col] =  -2;
 
 }
+void Nightmare::hit(char x, int col){
+   int row = x - '0';
+   grid[row][col] =  -2;
+}
+void Nightmare::editGameState(Neighborhood* player){
+   s->editGameState();
+}
+void Nightmare::setName(string user){
+   name = user;
+}
+string Nightmare::getName(){
+   return name;
+}
+
 
 Nightmare::~Nightmare(){delete []grid;}
 
