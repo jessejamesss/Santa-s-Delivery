@@ -37,7 +37,7 @@ class Neighborhood {
 	virtual int getAttempts() = 0;
 	virtual void miss(char, int) = 0;
 	virtual void hit(char, int) = 0;
-	virtual void editGameState(Neighborhood* s) = 0;
+	virtual void editGameState() = 0;
 	virtual void setName(std::string) = 0;
 	virtual std::string getName() = 0;
 	virtual void setStratFunction(GameState* s) = 0;

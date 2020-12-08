@@ -52,8 +52,8 @@ void Wonderland::hit(char x, int col){
    int row = x - '0';
    grid[row][col] =  -2;
 }
-void Wonderland::editGameState(Neighborhood* player){
-   s->editGameState(player);
+void Wonderland::editGameState(){
+   s->editGameState(this);
 }
 void Wonderland::setName(string user){
    name = user;
@@ -203,7 +203,7 @@ bool Wonderland::checkCol(char col){
 
 void Wonderland::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
-    grid[index1][index2] = type;
+    grid[index1][index2 - 1] = type;
 }
 
 void Wonderland::twoNeighborhoods() {

@@ -9,6 +9,7 @@ void GraphicsComposite:: drawBoard() {
 
 void GraphicsComposite:: add(Graphics* grid) {
     graphics.push_back(grid);
+    std::cout << "ADDING A GRAPHIC ********** " <<  endl; 
 }
 
 void GraphicsComposite::updateBoard(int** newGrid) {

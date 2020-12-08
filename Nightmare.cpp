@@ -25,9 +25,6 @@ Nightmare::Nightmare(){
            }
 }
 
-int Nightmare::getAttempts(){
-	return attempts;
-}
 
 void Nightmare::accept(Visitor* v){
 	v->visitNightmare(this);
@@ -116,8 +113,8 @@ void Nightmare::hit(char x, int col){
    int row = x - 'a';
    grid[row][col] =  -3;
 }
-void Nightmare::editGameState(Neighborhood* player){
-   s->editGameState(player);
+void Nightmare::editGameState(){
+   s->editGameState(this);
 }
 void Nightmare::setName(string user){
    name = user;
@@ -207,7 +204,7 @@ bool Nightmare::checkCol(char col){
 }
 void Nightmare::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
-    grid[index1][index2] = type;
+    grid[index1][index2 - 1] = type;
 }
 
 void Nightmare::twoNeighborhoods() {
@@ -222,7 +219,7 @@ void Nightmare::twoNeighborhoods() {
     int counter = 0; 
     char temp;
     while(valid == false){
-       /* cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 2 (A-F)\n";
+       cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 2 (A-F)\n";
         while(satisfied == false){
             cin >> row1;
 	    if(checkRow(row1) == true){
@@ -290,10 +287,10 @@ void Nightmare::twoNeighborhoods() {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 1 - 6\n";
             }
         }
-        satisfied = false; // resets the satisfied*/
+        satisfied = false; // resets the satisfied
 
 	//************my code ***********
-	cout << "please enter coordinate, such as a1-a2 no spaces" << endl; 
+	/*cout << "please enter coordinate, such as a1-a2 no spaces" << endl; 
 	string str; 
 	cin >> str; 
 	for(int i = 0; i < str.size(); ++i){
@@ -321,7 +318,7 @@ void Nightmare::twoNeighborhoods() {
 	}	
 
 	cout << "DONE *******" << endl; 
-	// ********* end my code *********
+	// ********* end my code *********/
         
         if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && check2ValidNeighbors(coordinateRow1, coordinateCol1, coordinateRow2, coordinateCol2) == true){
             setPoints(coordinateRow1, coordinateCol1, 5);
@@ -385,7 +382,7 @@ void Nightmare::threeNeighborhoods() {
     bool valid = false;
 
     while(valid == false){
-        /*cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 3 (A-F)\n";
+        cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 3 (A-F)\n";
         while(satisfied == false){
             cin >> row1;
            // row1 = tolower(row1);
@@ -514,7 +511,7 @@ void Nightmare::threeNeighborhoods() {
         }
         satisfied = false; // resets the satisfied*/
 
-	cout << "THREE : please enter coordinate, such as a1-a2 no spaces" << endl;
+	/*cout << "THREE : please enter coordinate, such as a1-a2 no spaces" << endl;
         string str;
         cin >> str;
 	
@@ -532,7 +529,7 @@ void Nightmare::threeNeighborhoods() {
 		}
 	}
 	
-        cout << "DONE *******" << endl;
+        cout << "DONE *******" << endl;*/
 
         if(checkValidity(coordinateRow1, coordinateCol1) == true && checkValidity(coordinateRow2, coordinateCol2) == true && 
             checkValidity(coordinateRow3, coordinateCol3) == true && 

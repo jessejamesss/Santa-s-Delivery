@@ -16,7 +16,9 @@
 #include "Wonderland.h"
 #include "Points.h"
 #include "Text.h" 
-
+#include <ctype.h>
+#include "AutoWin.h"
+#include "Attempts.h"
 
 using namespace std; 
 
@@ -28,7 +30,7 @@ main(){
 	Neighborhood* player_one;
 	cout << "Hello, what is your name?" << endl;
 	string name = "TEMPORARY"; 
-	//cin >> name; 
+	cin >> name; 
 	cout << name << ",  choose your theme, select 1 or 2" << endl;
 	cout << "1. Wonderland" << endl;
 	cout << "2. Nightmare" << endl;
@@ -36,7 +38,7 @@ main(){
 	cin >> theme;
 	if(theme == 1){player_one = new Wonderland();}
 	else player_one = new Nightmare();
-	//player_one->setName(name); // AJ 
+	player_one->setName(name); // AJ 
 
 	//Create Board 
 	GraphicsComposite* playerOneWindow = new GraphicsComposite(); // this will be the class with the vector to draw to the console
@@ -50,15 +52,48 @@ main(){
         Graphics* pointsGraphicOne = new Points(0);
         playerOneWindow->add(pointsGraphicOne);
 
-        Graphics* attemptsGraphicOne = new AttemptsBoard;
+        Graphics* attemptsGraphicOne = new Attempts();
         playerOneWindow->add(attemptsGraphicOne);
 
         Graphics* textOne = new Text(theme, name);
         playerOneWindow->add(textOne);
 
+	//******************** TEMP CODE ****************************
+	
+	int** arr = player_one->getGrid(); 
+	cout << "******************** TEMP CODE ****************************" << endl; 
+	
+	for(int i = 0; i < 6; ++i){
+        	for(int j = 0; j < 6; ++j){
+            		cout << arr[i][j] << ",";
+        	}
+        	cout << endl;
+    	}
+
+	cout << "******************* END TEMP CODE *************************" << endl; 
+	
+	//******************* END TEMP CODE *************************
+
+	playerOneWindow->drawBoard();
+	
 	//set Blocks
 	player_one->setBlocks(); // will give options to set all the different blocks
 	mainBoardOne->updateBoard(player_one->getGrid()); // shows where houses are located`
+
+
+	//******************** TEMP CODE ****************************
+	int** arr2 = player_one->getGrid();
+        cout << "******************** TEMP CODE ****************************" << endl;
+
+        for(int i = 0; i < 6; ++i){
+                for(int j = 0; j < 6; ++j){
+                        cout << arr2[i][j] << ",";
+                }
+                cout << endl;
+        }
+
+        cout << "******************* END TEMP CODE *************************" << endl;
+	//******************* END TEMP CODE *************************
 
 	playerOneWindow->drawBoard();
 
@@ -68,7 +103,7 @@ main(){
 	Neighborhood* player_two;
         cout << "Hello, what is your name?" << endl;
         string name_two = "TEMP TWO";
-        //cin >> name_two;
+        cin >> name_two;
         cout << name_two << ",  choose your theme, select 1 or 2" << endl;
         cout << "1. Wonderland" << endl;
         cout << "2. Nightmare" << endl;
@@ -76,13 +111,21 @@ main(){
         cin >> theme_two;
         if(theme_two == 1){player_two = new Wonderland();}
         else player_two = new Nightmare();
-        //player_two->setName(name_two); // AJ 
+        player_two->setName(name_two); // AJ 
 	
 	//create board
 	GraphicsComposite* playerTwoWindow = new GraphicsComposite(); // this will be the class with the vector to draw to the console
 
+	Graphics* textTwo = new Text(theme_two, name_two);
+        playerTwoWindow->add(textTwo);
+
+	
+
         Graphics* mainBoardTwo = new MainBoard();
         playerTwoWindow->add(mainBoardTwo);
+
+	Graphics* textBoarder = new Text(0, "");
+        playerTwoWindow->add(textBoarder);
 
         Graphics* attemptsBoardTwo = new AttemptsBoard();
         playerTwoWindow->add(attemptsBoardTwo);
@@ -90,15 +133,42 @@ main(){
         Graphics* pointsGraphicTwo = new Points(0);
         playerTwoWindow->add(pointsGraphicTwo);
 
-        Graphics* attemptsGraphicTwo = new AttemptsBoard();
+        Graphics* attemptsGraphicTwo = new Attempts();
         playerTwoWindow->add(attemptsGraphicTwo);
 
-        Graphics* textTwo = new Text(theme_two, name_two);
-        playerTwoWindow->add(textTwo);
     	
+	playerTwoWindow->drawBoard();
+	
+	int** arr4 = player_two->getGrid();
+        cout << "******************** TEMP CODE ****************************" << endl;
+
+        for(int i = 0; i < 6; ++i){
+                for(int j = 0; j < 6; ++j){
+                        cout << arr4[i][j] << ",";
+                }
+                cout << endl;
+        }
+
+        cout << "******************* END TEMP CODE *************************" << endl;
+
+	
 	//set blocks
 	player_two->setBlocks(); // will give options to set all the different blocks
         mainBoardTwo->updateBoard(player_two->getGrid()); // shows where houses are located`	
+
+	int** arr3 = player_two->getGrid();
+        cout << "******************** TEMP CODE ****************************" << endl;
+
+        for(int i = 0; i < 6; ++i){
+                for(int j = 0; j < 6; ++j){
+                        cout << arr3[i][j] << ",";
+                }
+                cout << endl;
+        }
+
+        cout << "******************* END TEMP CODE *************************" << endl;
+
+	playerTwoWindow->drawBoard();
 
 	//update visitor vector
 	neighborhoods.push_back(player_one); 
@@ -112,9 +182,9 @@ main(){
 	while(player_one->getGameOver() == false && player_two->getGameOver() == false)
 	{
 		cout << "_______________________________________________________________________________________" << endl << endl;
-		//cout << "************************ " << player_one->getName() << "'s Turn ************************" << endl;
+		cout << "************************ " << player_one->getName() << "'s Turn ************************" << endl;
 		cout << "_______________________________________________________________________________________" << endl << endl;
-		//cout << "Press Enter when "  << player_one->getName() << " is ready " << endl;   
+		cout << "Press Enter when "  << player_one->getName() << " is ready " << endl;   
 		char enter; 
 		cin >> enter; 
 
@@ -131,13 +201,17 @@ main(){
 
 		while(loop){
 			if(coordinate.size() > 1){
-				x = coordinate.at(0);  // gets an x coordinate from the player. AJ - will this function ask the player to enter the coordinate? 
-				y = coordinate.at(1); // gets a y coordinate from the player 
+				x = tolower(coordinate.at(0));  // gets an x coordinate from the player. AJ - will this function ask the player to enter the coordinate? 
+				cout << "X ----> " << x << endl; 
+				y = coordinate.at(1) - '0'; // gets a y coordinate from the player
+				cout << "Y ----> " << y << endl; 
 				loop = false; 
 			}
 			
-			check = player_two->checkValidity(x,y);//checks if the coordinates are valid. 
-			
+			if(x >= 97 && x <= 102 && y >= 1 && y <= 6){
+				check = true;//checks if the coordinates are valid. 
+			}
+
 			if(loop == true || check == false){ 
 				cout << "Invalid coordinate, please try again:" << endl;
 				cin >> coordinate;
@@ -151,22 +225,26 @@ main(){
 	//player one's turn				this part is to check if player_two has extra attempts
 		    if(player_one->getAttempts() > 0 && player_two->getAttempts() <= 1){
 			int value_two = player_two->retrieveCoordinate(x,y); //gets the value at those coordinates from palyer two
+			cout << "Guess on Player Two's Board" << value_two <<  endl;		
 			
+
 			// if the value is a miss
 			if(value_two == -1){
-				//player_two->miss(x, y); // needs to update the grid of player_two
-                                //attemptsBoardOne->updateBoard(player_two->getGrid());
-                                cout << "miss working :) " << endl; 
+				player_two->miss(x, y); // needs to update the grid of player_two
+                                attemptsBoardOne->updateBoard(player_two->getGrid());
+                                cout << "Player one miss working :) " << endl; 
 			}
 			// if the value is between 30 and 0 then these are points
 			if(value_two <= 30 && value_two > 0){ 
+				 cout << "Player One hit working :)" << endl;
 				player_one->addPoints(value_two); //check with AJ
-				//player_two->hit(x, y); // needs to update the grid of player_two
+				player_two->hit(x, y); // needs to update the grid of player_two
 				attemptsBoardOne->updateBoard(player_two->getGrid());
 				pointsGraphicOne->updatePoints(player_one->getPoints());  
 			}
 			//if the value equals the bonus coordinate value (check with AJ) 
                       	if(value_two == 40){ 
+				 cout << "Player One Visitor working :)" << endl;
 				for(int i = 0; i < neighborhoods.size(); ++i){ 
 					neighborhoods.at(i)->accept(new AddBonus());  
 				}
@@ -176,21 +254,23 @@ main(){
 			}
 			//if the value is Skip Turn
 			if(value_two == 50){
+				 cout << "Player One SkipTurn working :)" << endl;
 				player_one->setStratFunction(new SkipTurn()); //player_one or two??
-				//player_one->editGameState(); //editGameState will set player_one's attempts to zero
+				player_one->editGameState(); //editGameState will set player_one's attempts to zero
 				attemptsGraphicOne->updateAttempts(0); 				 
 				player_one_attempts = 0; 
 			}
 			//if the value is AutoWin
 			if(value_two == 60){
-                                //player_one->setStratFunction(new AutoWin());
-                                //player_one->editGameState();
+				 cout << "Player One AutoWin working :)" << endl;
+                                player_one->setStratFunction(new AutoWin());
+                                player_one->editGameState();
                                 cout << "strategy working :) " << endl;
                         }
 	
 			//deduct points takes points away from player_one. If it hits a 70 it means it's a Wonder class b/c Nightmare won't have a 70 in it 
 			if(value_two == 70){
-
+				 cout << "Player One DeductPoints working :)" << endl;
 				//player_one->deductPoints(); 
 				pointsGraphicTwo->updatePoints(player_one->getPoints());
 				attemptsGraphicOne->updateAttempts(player_one->getAttempts()); 		 
@@ -200,13 +280,25 @@ main(){
 			playerOneWindow->drawBoard(); 
 		     }
 
+		int** arr5 = player_one->getGrid();
+        cout << "******************** TEMP CODE ****************************" << endl;
+	cout << "~~~~~~~~~PLAYER ONE~~~~~~~~~~" << endl; 
+        for(int i = 0; i < 6; ++i){
+                for(int j = 0; j < 6; ++j){
+                        cout << arr5[i][j] << ",";
+                }
+                cout << endl;
+        }
+
+        cout << "******************* END TEMP CODE *************************" << endl;
+
 	//player two's turn 
 
 
                 cout << "_______________________________________________________________________________________" << endl << endl;
-                //cout << "************************ " << player_two->getName() << "'s Turn ************************" << endl;
+                cout << "************************ " << player_two->getName() << "'s Turn ************************" << endl;
                 cout << "_______________________________________________________________________________________" << endl << endl;
-                //cout << "Press Enter when "  << player_two->getName() << " is ready " << endl;
+                cout << "Press Enter when "  << player_two->getName() << " is ready " << endl;
                 char enter2;
                 cin >> enter2;
 
@@ -223,13 +315,17 @@ main(){
 
                 while(loop2){
                         if(coordinate2.size() > 1){
-                                x2 = coordinate2.at(0);  // gets an x coordinate from the player. AJ - will this function ask the player to enter the coordinate? 
-                                y2 = coordinate2.at(1); // gets a y coordinate from the player 
-                                loop2 = false;
+                                x2 = tolower(coordinate2.at(0));  // gets an x coordinate from the player. AJ - will this function ask the player to enter the coordinate? 
+				cout << "X2 ----> " << x2 << endl; 
+				y2 = coordinate2.at(1) - '0'; // gets a y coordinate from the player 
+                                cout << "Y2 ----> " << y2 << endl;
+				 loop2 = false;
                         }
                         
-                        check2 = player_one->checkValidity(x2,y2);//checks if the coordinates are valid. 
-                        
+			if(x2 >= 97 && x2 <= 102 && y2 >= 1 && y2 <= 6){
+                                check2 = true;//checks if the coordinates are valid. 
+                        }                        
+
                         if(loop2 == true || check2 == false){ 
                                 cout << "Invalid coordinate, please try again:" << endl;
                                 cin >> coordinate2;
@@ -239,21 +335,24 @@ main(){
 //************
 		   if(player_two->getAttempts() > 0 && player_one->getAttempts() <= 1){
 			int value_one = player_one->retrieveCoordinate(x,y); //gets the value at those coordinates from palyer two
-                        
+                         cout << "Guess on Player One's Board" << value_one <<  endl; 
 			 if(value_one == -1){
-                                //player_one->miss(x, y); // needs to update the grid of player_two
+				cout << "Player Two miss working :)" << endl; 
+                                player_one->miss(x, y); // needs to update the grid of player_two
                                 attemptsBoardTwo->updateBoard(player_one->getGrid());
                         }
 
 			if(value_one <= 30){
+				 cout << "Player Two hit working :)" << endl;
                                 player_two->addPoints(value_one); //check with AJ
-                                //player_one->hit(x, y); // needs to update the grid of player_two
+                                player_one->hit(x, y); // needs to update the grid of player_two
                                 attemptsBoardTwo->updateBoard(player_two->getGrid());
                                 pointsGraphicTwo->updatePoints(player_two->getPoints());
                         }
 
 			//if the value equals the bonus coordinate value (check with AJ)  
                         if(value_one == 40){
+				 cout << "Player Two bnus working :)" << endl;
                                 for(int i = 0; i < neighborhoods.size(); ++i){
                                         neighborhoods.at(i)->accept(new AddBonus());
                                 }
@@ -263,27 +362,42 @@ main(){
                         }
                         //if the value is Skip Turn
                         if(value_one == 50){
+				 cout << "Player Two skipTurns working :)" << endl;
                                 player_two->setStratFunction(new SkipTurn()); //player_one or two??
-                                //player_two->editGameState(); //editGameState will set player_one's attempts to zero
+                                player_two->editGameState(); //editGameState will set player_one's attempts to zero
                                 attemptsGraphicTwo->updateAttempts(0);
                                 player_two_attempts = 0;
                         }
 
 			
 			if(value_one == 60){
-                                //player_two->setStratFunction(new AutoWin());
-                                //player_two->editGameState();
+				 cout << "Player Two AutoWin working :)" << endl;
+                                player_two->setStratFunction(new AutoWin());
+                                player_two->editGameState();
                         }
 			
                         if(value_one == 70){
-
+				 cout << "Player Two DeductPoints working :)" << endl;
                                 //player_two->deductPoints();
                                 pointsGraphicTwo->updatePoints(player_two->getPoints());
                                 attemptsGraphicTwo->updateAttempts(player_two->getAttempts());
                         }
 			
 		
-			playerTwoWindow->drawBoard(); 		
+			playerTwoWindow->drawBoard();
+
+			int** arr6 = player_two->getGrid();
+        cout << "******************** TEMP CODE ****************************" << endl;
+	 cout << "~~~~~~~~~PLAYER TWO~~~~~~~~~~" << endl;
+        for(int i = 0; i < 6; ++i){
+                for(int j = 0; j < 6; ++j){
+                        cout << arr6[i][j] << ",";
+                }
+                cout << endl;
+        }
+
+        cout << "******************* END TEMP CODE *************************" << endl;
+ 		
 	           }
 		//if one of the players SkipTurn functions was set we want to count how many times we've passed them and then reset their turns. 
 		//I created the player_one_attempts variable instead of adding an incrementAttempts function b/c I don't want to break encapsulation.  

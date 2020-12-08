@@ -41,7 +41,7 @@ class Wonderland : public Neighborhood {
         int getAttempts();
         void miss(char, int);
         void hit(char, int);
-        void editGameState(Neighborhood*);
+        void editGameState();
         void setName(std::string s);
         std::string getName();
         bool checkRow(char);
