@@ -11,3 +11,14 @@ void GraphicsComposite:: add(Graphics* grid) {
     graphics.push_back(grid);
 }
 
+void GraphicsComposite::updateBoard(int** newGrid) {
+    return;
+}
+
+void GraphicsComposite::updatePoints(int newPoints) {
+    return;
+}
+
+void GraphicsComposite::updateAttempts(int newAttempts) {
+    return;
+}

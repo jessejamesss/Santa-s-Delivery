@@ -6,10 +6,20 @@
 using namespace std;
 
 class MainBoard : public Graphics {
+private:
+    string grid[6][6] = {{"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
+                          {"[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"}};
+
 public:
     MainBoard();
     void drawBoard();
-    void update(int* grid);
+    void updateBoard(int** newGrid);
+    void updatePoints(int newPoints);
+    void updateAttempts(int newAttempts);
 
 
 };

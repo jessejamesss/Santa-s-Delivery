@@ -1,17 +1,27 @@
 #include "MainBoard.h"
 
-void MainBoard:: drawBoard() {
-    string grid[7][7] = {{" ", " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 "},
-                          {"A","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"B","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"C","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"D","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"E","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"F","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"}};
+MainBoard::MainBoard() {}
 
-    //Draw the main board
-    for (int i =0; i < 7; i ++){
-        for (int j =0; j < 7; j++){
+void MainBoard:: updateBoard(int** newGrid) {
+    for (int i = 0; i < 6; ++i) {
+        for (int j = 0; j < 6; ++j) {
+            if (newGrid[i][j] == -2) {
+                grid[i][j] = "[·]";
+            }
+            if (newGrid[i][j] == -3) {
+                grid[i][j] = "[☆]";
+            }
+        }
+    }
+}
+
+void MainBoard:: drawBoard() {
+    char x = 'A';
+    cout << "   1   2   3   4   5   6" << endl;
+    for (int i = 0; i < 6; i ++){
+        cout << x << " ";
+        x++;
+        for (int j =0; j < 6; j++){
             cout << grid[i][j];
             cout << " ";
         }
@@ -19,6 +29,11 @@ void MainBoard:: drawBoard() {
     }
 }
 
-void MainBoard:: update(int* grid) {
-    //Needs Implementation
+void MainBoard::updatePoints(int newPoints) {
+    return;
 }
+
+void MainBoard:: updateAttempts(int newAttempts) {
+    return;
+}
+

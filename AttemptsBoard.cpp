@@ -1,17 +1,14 @@
 #include "AttemptsBoard.h"
 
-void AttemptsBoard:: drawBoard() {
-     string grid[7][7] = {{" ", " 1 ", " 2 ", " 3 ", " 4 ", " 5 ", " 6 "},
-                          {"A","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"B","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"C","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"D","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"E","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"},
-                          {"F","[ ]","[ ]","[ ]","[ ]","[ ]","[ ]"}};
-    
-     //Draw the board 
-     for (int i =0; i < 7; i ++){
-        for (int j =0; j < 7; j++){
+AttemptsBoard::AttemptsBoard() { }
+
+void AttemptsBoard::drawBoard() {
+    char x = 'A';
+    cout << "   1   2   3   4   5   6" << endl;
+    for (int i = 0; i < 6; i ++){
+        cout << x << " ";
+        x++;
+        for (int j =0; j < 6; j++){
             cout << grid[i][j];
             cout << " ";
         }
@@ -19,6 +16,23 @@ void AttemptsBoard:: drawBoard() {
     }
 }
 
-void AttemptsBoard:: update(int* grid) {
-    //Needs Implementation
+void AttemptsBoard::updateBoard(int** newGrid) {
+    for (int i = 0; i < 6; ++i) {
+        for (int j = 0; j < 6; ++j) {
+            if (newGrid[i][j] == -2) {
+                grid[i][j] = "[·]";
+            }
+            if (newGrid[i][j] == -3) {
+                grid[i][j] = "[☆]";
+            }
+        }
+    }
+}
+
+void AttemptsBoard::updatePoints(int newPoints) {
+    return;
+}
+
+void AttemptsBoard::updateAttempts(int newAttempts) {
+    return;
 }
