@@ -110,8 +110,8 @@ void Nightmare::hit(char x, int col){
    int row = x - 'a';
    grid[row][col] =  -3;
 }
-void Nightmare::editGameState(Neighborhood* player){
-   s->editGameState(player);
+void Nightmare::editGameState(){
+   s->editGameState(this);
 }
 void Nightmare::setName(string user){
    name = user;
@@ -201,7 +201,7 @@ bool Nightmare::checkCol(char col){
 }
 void Nightmare::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
-    grid[index1][index2] = type;
+    grid[index1][index2 - 1] = type;
 }
 
 void Nightmare::twoNeighborhoods() {
