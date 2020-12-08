@@ -53,7 +53,7 @@ void Wonderland::hit(char x, int col){
    grid[row][col] =  -2;
 }
 void Wonderland::editGameState(Neighborhood* player){
-//   s->editGameState();
+   s->editGameState(player);
 }
 void Wonderland::setName(string user){
    name = user;

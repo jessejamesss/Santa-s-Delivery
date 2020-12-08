@@ -111,7 +111,7 @@ void Nightmare::hit(char x, int col){
    grid[row][col] =  -2;
 }
 void Nightmare::editGameState(Neighborhood* player){
-   s->editGameState();
+   s->editGameState(player);
 }
 void Nightmare::setName(string user){
    name = user;
