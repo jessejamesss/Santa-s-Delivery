@@ -8,3 +8,4 @@ class SkipTurn : public GameState {
         SkipTurn();
         virtual void editGameState(Neighborhood* n);
 }
+#endif

@@ -3,6 +3,9 @@
 #include <iostream>
 #include <stdio.h>
 #include <ctype.h>
+#include <stdlib.h>
+#include <sstream>
+#include <string>
 #include "visitor.hpp"
 #include "GameState.hpp"
 
@@ -36,7 +39,8 @@ class Nightmare : public Neighborhood {
 	void setAttempts(int x);
         void setGameOver();
 	void setStratCoords();
-    private:
+        void setStratFunction(Strategy* s); 
+   private:
         int points;
         std::string theme;
         /*int grid[6][6] = {{-1,-1,-1,-1,-1,-1},

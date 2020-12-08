@@ -8,4 +8,5 @@ class GameOver : public GameState {
         GameOver();
         virtual void editGameState(Neighborhood* n);
 }
+#endif
 

@@ -4,16 +4,17 @@
 #include "addBonus.hpp"
 #include "Nightmare.h"
 #include "Neighborhood.h"
+#include "Wonderland.h"
 
 using namespace std;
 
 int main() {
-  // Wonderland* player2 = new Wonderland();
+   Neighborhood* player2 = new Wonderland();
    Neighborhood* player1 = new Nightmare();
 
     	
     int** arr = player1->getGrid(); 
-    cout << "God is faithful who also will do it" << endl;  
+
 
     for(int i = 0; i < 6; ++i){
         for(int j = 0; j < 6; ++j){
@@ -41,6 +42,16 @@ int main() {
         }
         cout << endl;
     }
+player1->setBlocks();
+//player2->setBlocks();
 
-    //Wonderland* player2 = new Wonderland();
+cout << endl << endl << endl;
+
+for(int i = 0; i < 6; ++i){
+   for(int j = 0; j < 6; ++j){
+      cout << arr[i][j] << ",";
+        }
+        cout << endl;
+
+}    //Wonderland* player2 = new Wonderland();
 }

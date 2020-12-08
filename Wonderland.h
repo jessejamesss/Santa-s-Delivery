@@ -37,7 +37,7 @@ class Wonderland : public Neighborhood {
         void setAttempts(int x);
 	void setGameOver();
         void setStratCoords();
-	
+ 	void setStratFunction(Strategy* s);	
     private:
         int points;
         std::string theme;
@@ -45,8 +45,8 @@ class Wonderland : public Neighborhood {
         bool gameOver;
         char coordinateX;
         int coordinateY;
-        Visitor* visitor;
-        Strategy* strategy;
+        Visitor* v;
+        Strategy* s;
 	char bonusCoordinateX;
         int bonusCoordinateY;
         int attempts;

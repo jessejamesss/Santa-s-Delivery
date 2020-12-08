@@ -41,11 +41,16 @@ void Nightmare::setBonusCoordinateX(int row){
 void Nightmare::setBonusCoordinateY(int col){
 	BonusCoordinateY = col; 
 }
+
+void Nightmare::setStratFunction(Strategy* strat) {
+    s = strat;
+}
+
 void Nightmare::setStratCoords(){
     bool empty =  false;
     int xCoord;
     int yCoord;
-
+    srand(time(NULL));   
     while(empty != true){ 
         xCoord = rand() % 5;
         yCoord = rand() % 5;
@@ -56,6 +61,7 @@ void Nightmare::setStratCoords(){
     }
 
     empty = false;
+    srand(time(NULL));
     while(empty != true) {
         xCoord = rand() % 5;
         yCoord = rand() % 5;
@@ -112,7 +118,7 @@ string Nightmare::getTheme() {
 
 bool Nightmare::checkValidity(char x, int index2){   // ADD CHECK FOR BOUNDS!!!! (CHECK BOUNDS)
     int index1 = x - 'a';
-    if(grid[index1][index2] != -1 || index1 - index2 == 0){
+    if(grid[index1][index2] != -1){
         return false;
     }
     else {
@@ -141,7 +147,7 @@ void Nightmare::twoNeighborhoods() {
     int coordinateCol2;
     bool valid = false;
     int counter = 0; 
-
+    char temp;
     while(valid == false){
         cout << "\nPlease select a row on the grid where you want to place your first Coordinate for your Nightmare of 2 (A-F)\n";
         while(satisfied == false){
@@ -160,13 +166,16 @@ void Nightmare::twoNeighborhoods() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin >> column1;
-            if(column1 >= 0 && column1 < 6) {
-                coordinateCol1 = column1; // maybe change to one specific variable later
-                satisfied = true;
+            cin >> temp;
+	    if(isdigit(temp) == true) {
+		column1 = temp - '0';
+           	 if(column1 >= 0 && column1 < 6) {
+                	coordinateCol1 = column1; // maybe change to one specific variable later
+                	satisfied = true;
+           	 }
             }
-            else {
-                cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
+	    else {
+              	cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
         }
         satisfied = false; // resets the satisfied
@@ -188,11 +197,14 @@ void Nightmare::twoNeighborhoods() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin >> column2;
-            if(column2 >= 0 && column2 < 6) {
-                coordinateCol2 = column2;
-                satisfied = true;
-            }
+            cin >> temp;
+            if(isdigit(temp) == true) {
+                column2 = temp - '0';
+           	if(column2 >= 0 && column2 < 6) {
+               	   coordinateCol2 = column2;
+                   satisfied = true;
+            	}
+	   }
             else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
@@ -256,7 +268,7 @@ void Nightmare::threeNeighborhoods() {
     char coordinateRow3;
     int coordinateCol3;
     int counter = 0; 
-
+    char temp;
     bool valid = false;
 
     while(valid == false){
@@ -277,11 +289,14 @@ void Nightmare::threeNeighborhoods() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin >> column1;
-            if(column1 >= 0 && column1 < 6) {
+            cin >> temp;
+            if(isdigit(temp) == true) {
+                column1 = temp - '0';
+            	if(column1 >= 0 && column1 < 6) {
                 coordinateCol1 = column1; // maybe change to one specific variable later
                 satisfied = true;
-            }
+            	}
+	    }
             else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
@@ -305,12 +320,15 @@ void Nightmare::threeNeighborhoods() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin >> column2;
-            if(column2 >= 0 && column2 < 6) {
-                coordinateCol2 = column2;
-                satisfied = true;
+            cin >> temp;
+            if(isdigit(temp) == true) {
+                column2 = temp - '0';
+                if(column2 >= 0 && column2 < 6) {
+               	    coordinateCol2 = column2;
+                    satisfied = true;
+    	        }
             }
-            else {
+	    else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
         }
@@ -334,11 +352,14 @@ void Nightmare::threeNeighborhoods() {
         cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
-            cin >> column3;
-            if(column3 >= 0 && column3 < 6) {
-                coordinateCol3 = column3;
-                satisfied = true;
-            }
+            cin >> temp;
+            if(isdigit(temp) == true) {
+                column3 = temp - '0';
+                if(column3 >= 0 && column3 < 6) {
+                     coordinateCol3 = column3;
+                     satisfied = true;
+                 }
+	   } 
             else {
                 cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
             }
@@ -383,8 +404,20 @@ bool Nightmare::check3ValidNeighbors(char coordrow1, int col11, char coordrow2, 
     int col2 = col22;
     int col3 = col33;
     
+    if(row1 == row2 && col1 == col2){
+        return false;
+    }
+
+    if(row2 == row3 && col2 == col3){
+        return false;
+    }
+
+    if(row1 == row3 && col1 == col3){
+        return false;
+    }
+    // check to see if any of the points are equal to each other
     if(row1 - row2 == 0 && row2 - row3 == 0){
-        if((col1 - col2 >= -1 && col1 - col2 <= 1) && (col2 - col3 >= -1 && col2 - col3 <= 1))
+        if(((col1 - col2 >= -1 && col1 - col2 <= 1) && (col2 - col3 >= -1 && col2 - col3 <= 1)) || ((col3 - col1 >= -1 && col3 - col1 <= 1) && (col2 - col3 >= -1 && col2 - col3 <= 1)) || ((col3 - col1 >= -1 && col3 - col1 <= 1) && (col2 - col1 >= -1 && col2 - col1 <= 1)))
             horizontal = true;
     }
     if(col1 - col2 == 0 && col2 - col3 == 0) {

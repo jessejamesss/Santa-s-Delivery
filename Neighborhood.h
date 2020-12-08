@@ -34,7 +34,7 @@ class Neighborhood {
 	virtual void setAttempts(int x) = 0;
 	virtual void setGameOver() = 0;
 	virtual void setStratCoords() = 0;
-
+	virtual void setStratFunction(Strategy* s) = 0;
     protected:
         int points;
         std::string theme;
