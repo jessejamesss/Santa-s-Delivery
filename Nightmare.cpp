@@ -100,9 +100,32 @@ void Nightmare::setStratCoords(){
             grid[xCoord][yCoord] = 70;
         }
     }
+}
 
+int Nightmare::getAttempts(){
+   return attempts;
+}
+
+
+void Nightmare::miss(char x, int col){
+   int row = x - '0';
+   grid[row][col] =  -2;
 
 }
+void Nightmare::hit(char x, int col){
+   int row = x - '0';
+   grid[row][col] =  -2;
+}
+void Nightmare::editGameState(Neighborhood* player){
+   s->editGameState(player);
+}
+void Nightmare::setName(string user){
+   name = user;
+}
+string Nightmare::getName(){
+   return name;
+}
+
 
 Nightmare::~Nightmare(){delete []grid;}
 

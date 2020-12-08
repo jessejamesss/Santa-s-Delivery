@@ -34,7 +34,13 @@ class Neighborhood {
 	virtual void setAttempts(int x) = 0;
 	virtual void setGameOver() = 0;
 	virtual void setStratCoords() = 0;
-	virtual void setStratFunction(Strategy* s) = 0;
+	virtual int getAttempts() = 0;
+	virtual void miss(char, int) = 0;
+	virtual void hit(char, int) = 0;
+	virtual void editGameState(Neighborhood* s) = 0;
+	virtual void setName(std::string) = 0;
+	virtual std::string getName() = 0;
+	virtual void setStratFunction(GameState* s) = 0;
     protected:
         int points;
         std::string theme;
@@ -52,11 +58,14 @@ class Neighborhood {
         char coordinateX;
         int coordinateY;
         int attempts;
-        virtual void twoNeighborhoods() = 0;
+        GameState* s;
+	virtual void twoNeighborhoods() = 0;
         virtual void threeNeighborhoods() = 0;
         virtual bool check2ValidNeighbors(char x, int y, char z, int zz) = 0;
         virtual bool check3ValidNeighbors(char x, int y, char z, int zz, char x1, int x2) = 0;
         //virtual char setXCoord() = 0; // implement later
         //virtual int setYCoord() = 0; // implement later
+        std::string name;
+
 };
 #endif

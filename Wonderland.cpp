@@ -43,8 +43,28 @@ void Wonderland::setBonusCoordinateX(int row){
 void Wonderland::setBonusCoordinateY(int col){
 	BonusCoordinateY = col; 
 }
+void Wonderland::miss(char x, int col){
+   int row = x - '0';
+   grid[row][col] =  -2;
 
-void Wonderland::setStratFunction(Strategy* strat) {
+}
+void Wonderland::hit(char x, int col){
+   int row = x - '0';
+   grid[row][col] =  -2;
+}
+void Wonderland::editGameState(Neighborhood* player){
+   s->editGameState(player);
+}
+void Wonderland::setName(string user){
+   name = user;
+}
+string Wonderland::getName(){
+   return name;
+}
+int Wonderland::getAttempts(){
+   return attempts;
+}
+void Wonderland::setStratFunction(GameState* strat) {
     s = strat;
 }
 
