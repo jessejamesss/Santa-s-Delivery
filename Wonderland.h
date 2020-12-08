@@ -44,7 +44,9 @@ class Wonderland : public Neighborhood {
         void editGameState(Neighborhood*);
         void setName(std::string s);
         std::string getName();
-        
+        bool checkRow(char);
+        bool checkCol(char);
+ 
     private:
         int points;
         std::string theme;
