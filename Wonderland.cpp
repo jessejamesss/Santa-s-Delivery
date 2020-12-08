@@ -52,6 +52,19 @@ void Wonderland::setStratCoords(){
     bool empty =  false;
     int xCoord;
     int yCoord;
+    
+    srand(time(NULL));
+
+    while(empty != true){
+        xCoord = rand() % 5;
+        yCoord = rand() % 5;
+        if(grid[xCoord][yCoord] == -1){
+            empty = true;
+            grid[xCoord][yCoord] = 40;
+        }
+    }
+
+    empty = false; 
     srand(time(NULL));
 
     while(empty != true){ 
@@ -74,6 +87,19 @@ void Wonderland::setStratCoords(){
             grid[xCoord][yCoord] = 60;
         }
     }
+
+    empty = false;
+    srand(time(NULL));
+
+    while(empty != true){
+        xCoord = rand() % 5;
+        yCoord = rand() % 5;
+        if(grid[xCoord][yCoord] == -1){
+            empty = true;
+            grid[xCoord][yCoord] = 70;
+        }
+    }
+
 
 }
 Wonderland::~Wonderland(){delete []grid;}
