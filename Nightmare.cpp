@@ -102,13 +102,13 @@ int Nightmare::getAttempts(){
 
 
 void Nightmare::miss(char x, int col){
-   int row = x - '0';
+   int row = x - 'a';
    grid[row][col] =  -2;
 
 }
 void Nightmare::hit(char x, int col){
-   int row = x - '0';
-   grid[row][col] =  -2;
+   int row = x - 'a';
+   grid[row][col] =  -3;
 }
 void Nightmare::editGameState(Neighborhood* player){
    s->editGameState(player);
@@ -192,7 +192,7 @@ bool Nightmare::checkCol(char col){
    
    if(isdigit(col) == true) {
        col = col - '0';
-       if(col >= 0 && col < 6) {
+       if(col >= 1 && col < 7) {
 	  return true;
 	}
    }
@@ -235,7 +235,7 @@ void Nightmare::twoNeighborhoods() {
         }
         satisfied = false; // resets the satisfied
 
-        cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
+        cout << "\nPlease select a column that corresponds with the row you just selected (1 - 6)";
         
         while(satisfied == false){
             cin >> temp;
@@ -248,7 +248,7 @@ void Nightmare::twoNeighborhoods() {
                  satisfied = true;
             }
 	    else {
-              	cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
+              	cout << "\nThat is not a valid column. Please select a column between the numbers 1 - 6\n";
             }
         }
         satisfied = false; // resets the satisfied
@@ -268,7 +268,7 @@ void Nightmare::twoNeighborhoods() {
         }
         satisfied = false; // resets the satisfied
 
-        cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
+        cout << "\nPlease select a column that corresponds with the row you just selected (1 - 6)";
         
         while(satisfied == false){
             cin >> temp;
@@ -281,7 +281,7 @@ void Nightmare::twoNeighborhoods() {
                    satisfied = true;
             }
             else {
-                cout << "\nThat is not a valid column. Please select a column between the numbers 0 - 5\n";
+                cout << "\nThat is not a valid column. Please select a column between the numbers 1 - 6\n";
             }
         }
         satisfied = false; // resets the satisfied

@@ -192,7 +192,7 @@ bool Wonderland::checkCol(char col){
 
    if(isdigit(col) == true) {
        col = col - '0';
-       if(col >= 0 && col < 6) {
+       if(col >= 1 && col < 7) {
           return true;
         }
    }
