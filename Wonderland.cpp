@@ -23,10 +23,13 @@ Wonderland::Wonderland(){
 }
 
 void Wonderland::accept(Visitor* v){
+	cout << "Working in Wonderland" << endl; 
 	v->visitWonderland(this);
+	cout << "Working after wonderland" << endl; 
 }
 void Wonderland::setAttempts(int x){
         attempts = x;
+	cout << "ATTEMPTS = " << x << ",  " << attempts << endl; 
 }
 void Wonderland::setGameOver(){
 	gameOver = true;
@@ -174,7 +177,7 @@ bool Wonderland::checkValidity(char x, int index2){
 }
 
 bool Wonderland::getGameOver(){
-	return false; 
+	return gameOver; 
 }
 
 
@@ -192,7 +195,7 @@ bool Wonderland::checkCol(char col){
 
    if(isdigit(col) == true) {
        col = col - '0';
-       if(col >= 1 && col < 7) {
+       if(col >= 0 && col < 6) {
           return true;
         }
    }
@@ -203,7 +206,7 @@ bool Wonderland::checkCol(char col){
 
 void Wonderland::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
-    grid[index1][index2 - 1] = type;
+    grid[index1][index2] = type;
 }
 
 void Wonderland::twoNeighborhoods() {

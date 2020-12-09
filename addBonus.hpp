@@ -17,15 +17,16 @@ public:
 	AddBonus(){} 
 
         void visitWonderland(Neighborhood* neigh){
-		
+	 	cout << "Working bonus 1 " << endl; 	
 		int** ar = neigh->getGrid(); 
+		cout << "Working bonus 1 " << endl;
 		// int ar[7][7] = Neighborhood->getGrid();
 
-		for(int i = 1; i < 7; ++i)
+		for(int i = 0; i < 6; ++i)
     		{
-        		for(int j = 1; j < 7; ++j)
+        		for(int j = 0; j < 6; ++j)
         		{
-            			ar[i][j] = ar[i][j] * 2; 
+            			if(ar[i][j] > 0 && ar[i][j] <= 30){ar[i][j] = ar[i][j] * 2;} 
         		}
     		}
 

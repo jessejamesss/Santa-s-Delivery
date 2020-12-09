@@ -16,10 +16,10 @@ Text::Text(int theme, string name) {
 
 void Text:: drawBoard() {
     if (theme == "Attempts") {
-        cout << "      " << theme << " Board";
+        cout << "                 "  << theme << " Board";
     }
     else {
-        cout << " " << name << "'s " << theme << " Board";
+        cout << "           " << name << "'s " << theme << " Board";
     }
 }
 

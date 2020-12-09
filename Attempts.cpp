@@ -5,7 +5,7 @@ Attempts::Attempts() {
 }
 
 void Attempts::drawBoard() {
-    cout << "Attempts left: " << numAttempts;
+    cout << "Attempts left: " << numAttempts << endl << endl;
 }
 
 void Attempts::updateAttempts(int newAttempts) {

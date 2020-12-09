@@ -8,7 +8,7 @@ void MainBoard:: updateBoard(int** newGrid) {
             if (newGrid[i][j] == -2) {
                 grid[i][j] = "[·]";
             }
-            if (newGrid[i][j] == -3) {
+            if (newGrid[i][j] == -3 || newGrid[i][j] == 5 || newGrid[i][j] == 3) {
                 grid[i][j] = "[☆]";
             }
         }
@@ -17,8 +17,9 @@ void MainBoard:: updateBoard(int** newGrid) {
 
 void MainBoard:: drawBoard() {
     char x = 'A';
-    cout << "   1   2   3   4   5   6" << endl;
+    cout << "              0   1   2   3   4   5" << endl;
     for (int i = 0; i < 6; i ++){
+	cout <<  "           ";
         cout << x << " ";
         x++;
         for (int j =0; j < 6; j++){

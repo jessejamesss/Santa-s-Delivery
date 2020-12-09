@@ -5,7 +5,7 @@ Points::Points(int points) {
 }
 
 void Points::drawBoard() {
-    cout << "Points: " << points << endl;
+    cout << "Points: " << points << "     ";
     cout << endl;
 }
 

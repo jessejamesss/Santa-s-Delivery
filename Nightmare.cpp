@@ -178,7 +178,7 @@ bool Nightmare::checkValidity(char x, int index2){   // ADD CHECK FOR BOUNDS!!!!
 }
 
 bool Nightmare::getGameOver(){
-	return false; 
+	return gameOver; 
 }
 
 bool Nightmare::checkRow(char row1){
@@ -195,7 +195,7 @@ bool Nightmare::checkCol(char col){
    
    if(isdigit(col) == true) {
        col = col - '0';
-       if(col >= 1 && col < 7) {
+       if(col >= 0 && col < 6) {
 	  return true;
 	}
    }
@@ -204,7 +204,7 @@ bool Nightmare::checkCol(char col){
 }
 void Nightmare::setPoints(char x, int index2, int type){
     int index1 = x - 'a';
-    grid[index1][index2 - 1] = type;
+    grid[index1][index2] = type;
 }
 
 void Nightmare::twoNeighborhoods() {

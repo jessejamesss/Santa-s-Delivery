@@ -5,5 +5,6 @@
 SkipTurn::SkipTurn(){}
 
 void SkipTurn::editGameState(Neighborhood* n){
-   n->setAttempts(0); 
+   n->setAttempts(0);
+   cout << "IN SKIP TURN ***************** " << endl << endl;  
 }
