@@ -86,7 +86,7 @@ void Nightmare::setStratCoords(){
             grid[xCoord][yCoord] = 60;
         }
     }
-    empty = false;
+/*    empty = false;
 
     srand(time(NULL));
     while(empty != true){
@@ -96,7 +96,7 @@ void Nightmare::setStratCoords(){
             empty = true;
             grid[xCoord][yCoord] = 70;
         }
-    }
+    }*/
 }
 
 int Nightmare::getAttempts(){
