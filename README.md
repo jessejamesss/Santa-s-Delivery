@@ -35,4 +35,5 @@ Our Main file will be able to call the Graphics Class, the Neighborhood Class an
  > Instructions on installing and running your application
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
+ > * To test our project, we used Google's Unit Test Framework for C++. We utilized the Google Unit Test Framework to create unit tests for each of our classes that implemented our respective features.
  
