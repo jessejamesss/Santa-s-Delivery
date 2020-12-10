@@ -6,7 +6,7 @@ void AttemptsBoard::drawBoard() {
     char x = 'A';
     cout << "              0   1   2   3   4   5" << endl;
     for (int i = 0; i < 6; i ++){
-	cout << "           ";
+        cout << "           ";
         cout << x << " ";
         x++;
         for (int j =0; j < 6; j++){
@@ -25,6 +25,9 @@ void AttemptsBoard::updateBoard(int** newGrid) {
             }
             if (newGrid[i][j] == -3) {
                 grid[i][j] = "[☆]";
+            }
+            if (newGrid[i][j] == -10) {
+               grid[i][j] = "[☄]";
             }
         }
     }

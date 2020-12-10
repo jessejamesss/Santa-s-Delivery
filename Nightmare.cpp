@@ -110,8 +110,15 @@ void Nightmare::miss(char x, int col){
 
 }
 void Nightmare::hit(char x, int col){
-   int row = x - 'a';
-   grid[row][col] =  -3;
+
+  int row = x - 'a';
+  if(grid[row][col] > 39){
+    grid[row][col] = -10;
+  }
+  else {
+   grid[row][col] = -3;
+  }
+
 }
 void Nightmare::editGameState(){
    s->editGameState(this);
@@ -238,7 +245,7 @@ void Nightmare::twoNeighborhoods() {
         }
         satisfied = false; // resets the satisfied
 
-        cout << "\nPlease select a column that corresponds with the row you just selected (1 - 6)";
+        cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
             cin >> temp;
@@ -251,7 +258,7 @@ void Nightmare::twoNeighborhoods() {
                  satisfied = true;
             }
 	    else {
-              	cout << "\nThat is not a valid column. Please select a column between the numbers 1 - 6\n";
+              	cout << "\nThat is not a valid column. Please select a column between the numbers (0 - 5)\n";
             }
         }
         satisfied = false; // resets the satisfied
@@ -271,7 +278,7 @@ void Nightmare::twoNeighborhoods() {
         }
         satisfied = false; // resets the satisfied
 
-        cout << "\nPlease select a column that corresponds with the row you just selected (1 - 6)";
+        cout << "\nPlease select a column that corresponds with the row you just selected (0 - 5)";
         
         while(satisfied == false){
             cin >> temp;
@@ -284,7 +291,7 @@ void Nightmare::twoNeighborhoods() {
                    satisfied = true;
             }
             else {
-                cout << "\nThat is not a valid column. Please select a column between the numbers 1 - 6\n";
+                cout << "\nThat is not a valid column. Please select a column between the numbers (0 - 5)\n";
             }
         }
         satisfied = false; // resets the satisfied

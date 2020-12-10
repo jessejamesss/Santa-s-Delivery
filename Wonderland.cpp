@@ -23,13 +23,10 @@ Wonderland::Wonderland(){
 }
 
 void Wonderland::accept(Visitor* v){
-	cout << "Working in Wonderland" << endl; 
 	v->visitWonderland(this);
-	cout << "Working after wonderland" << endl; 
 }
 void Wonderland::setAttempts(int x){
         attempts = x;
-	cout << "ATTEMPTS = " << x << ",  " << attempts << endl; 
 }
 void Wonderland::setGameOver(){
 	gameOver = true;
@@ -52,8 +49,14 @@ void Wonderland::miss(char x, int col){
 
 }
 void Wonderland::hit(char x, int col){
-   int row = x - 'a';
-   grid[row][col] =  -3;
+	int row = x - 'a';
+  if(grid[row][col] > 39){
+    grid[row][col] = -10;
+  }
+  else {
+   grid[row][col] = -3;
+  }
+
 }
 void Wonderland::editGameState(){
    s->editGameState(this);

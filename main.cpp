@@ -8,7 +8,6 @@
 #include "Graphics.h"
 #include "MainBoard.h"
 #include "Neighborhood.h"
-//#include "Neighborhood.hpp"
 #include "Nightmare.h"
 #include "removeBonus.hpp"
 #include "SkipTurn.h"
@@ -39,31 +38,6 @@ main(){
 	cout << "          Name: "; 
 	cin >> name;
 	cout << endl << endl << "--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --" << endl << endl;   
-	//int theme = 0; 
-	//	cout << "          " << name << ",  choose your theme, select 1 or 2" << endl;
-        //	cout << "          1. Wonderland" << endl;
-        //	cout << "          2. Nightmare" << endl;
-        //	cout << "          Theme: ";
-	//	cin >> theme;
-		 
-//	cout << endl << "--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --" << endl;
-//	bool wrong = false;
-//	if(theme == 1){player_one = new Wonderland();}
-	//else if (theme == 2) {player_one = new Nightmare();}
-	/*else wrong = true; 
-	while(wrong == true){
-		cout << "Incorrect input, please choose 1 or 2 " << endl; 
-		cout << "          1. Wonderland" << endl;
-                cout << "          2. Nightmare" << endl;
-                cout << "          Theme: ";
-                getline(cin,theme);
-		if(theme == 1 || theme == 2){ wrong == false;} 
-
-	}
-
-	if(theme == 1){player_one = new Wonderland();}
-        else if (theme == 2) {player_one = new Nightmare();}
-	*/
 
 	player_one->setName(name); // AJ 
 
@@ -88,22 +62,6 @@ main(){
         Graphics* attemptsGraphicOne = new Attempts();
         playerOneWindow->add(attemptsGraphicOne);
 
-
-	//******************** TEMP CODE ****************************
-	
-	/*int** arr = player_one->getGrid(); 
-	cout << "******************** TEMP CODE ****************************" << endl; 
-	
-	for(int i = 0; i < 6; ++i){
-        	for(int j = 0; j < 6; ++j){
-            		cout << arr[i][j] << ",";
-        	}
-        	cout << endl;
-    	}
-
-	cout << "******************* END TEMP CODE *************************" << endl; 
-	
-	******************* END TEMP CODE *************************/
 
 	playerOneWindow->drawBoard();
 	
@@ -147,15 +105,8 @@ main(){
 	 cout << "          Name: "; 
         cin >> name_two;
 	cout << endl << endl << "--  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --  --" << endl << endl; 
-        //int theme_two;
-	//	cout << name_two << ",  choose your theme, select 1 or 2" << endl;
-        //	cout << "          1. Wonderland" << endl;
-        //	cout << "          2. Nightmare" << endl;
-	//	cout << "          Theme: "; 
-          //      cin >> theme_two;
-        //if(theme_two == 1){player_two = new Wonderland();}
-        //else player_two = new Nightmare();
-        player_two->setName(name_two); // AJ 
+        
+	player_two->setName(name_two); // AJ 
 	
 	//create board
 	GraphicsComposite* playerTwoWindow = new GraphicsComposite(); // this will be the class with the vector to draw to the console
@@ -180,19 +131,6 @@ main(){
 
     	
 	playerTwoWindow->drawBoard();
-	
-	/*int** arr4 = player_two->getGrid();
-        cout << "******************** TEMP CODE ****************************" << endl;
-	 cout << "~~~~~~~~~~~~~~~~ " << player_two->getName() << "'s Grid ~~~~~~~~~~~~~~~~~~~~" << endl;
-        for(int i = 0; i < 6; ++i){
-                for(int j = 0; j < 6; ++j){
-                        cout << arr4[i][j] << ",";
-                }
-                cout << endl;
-        }
-
-        cout << "******************* END TEMP CODE *************************" << endl;*/
-
 	
 	//set blocks
 	player_two->setBlocks(); // will give options to set all the different blocks
@@ -239,6 +177,10 @@ main(){
 	{
 
 	   if(player_one->getAttempts() > 0 && player_two->getAttempts() <= 1){
+		if(player_one->getAttempts() == 2) {
+			player_one->setAttempts(1);
+			attemptsGraphicOne->updateAttempts(1);
+		}
 		cout << "_______________________________________________________________________________________" << endl << endl;
 		cout << "************************ " << player_one->getName() << "'s Turn ************************" << endl;
 		cout << "_______________________________________________________________________________________" << endl << endl;
@@ -253,7 +195,7 @@ main(){
         	cout << "*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_" << endl << endl;
 		
 		int** ar = player_two->getGrid();
-        cout << "******************** TEMP CODE ****************************" << endl;
+        /*cout << "******************** TEMP CODE ****************************" << endl;
 	 cout << "~~~~~~~~~~~~~~~~ " << player_two->getName() << "'s Grid ~~~~~~~~~~~~~~~~~~~~" << endl;
         for(int i = 0; i < 6; ++i){
                 for(int j = 0; j < 6; ++j){
@@ -262,7 +204,7 @@ main(){
                 cout << endl;
         }
 
-        cout << "******************* END TEMP CODE *************************" << endl;
+        cout << "******************* END TEMP CODE *************************" << endl;*/
 		
 		playerOneWindow->drawBoard();
 		
@@ -333,6 +275,9 @@ main(){
 				//the players get three turns with this setting. After three turns it goes back to the normal setting
 				bonusValueTurns = 3;
 				mainBoardOne->updateBoard(player_one->getGrid()); //since getGrid() returns an array pointer I may not neet to do this b/c it'll automatically get updated									            when playerOneWindow->draw(); is called. 			 
+				player_two->hit(x, y);
+                                attemptsBoardOne->updateBoard(player_two->getGrid());
+				--houseCount1;
 			}
 			//if the value is Skip Turn
 			if(value_two == 50){
@@ -342,7 +287,8 @@ main(){
 				attemptsGraphicOne->updateAttempts(0); 				 
 				player_one_attempts = 0; 
         			skip = true;
-
+				player_two->hit(x, y);
+                                attemptsBoardOne->updateBoard(player_two->getGrid());
 			}
 			//if the value is AutoWin
 			if(value_two == 60){
@@ -350,22 +296,21 @@ main(){
                                 player_one->setStratFunction(new AutoWin());
                                 player_one->editGameState();
                                 cout << "strategy working :) " << endl;
-
+				player_two->hit(x, y);
+                                attemptsBoardOne->updateBoard(player_two->getGrid());
 			}
 	
 			//deduct points takes points away from player_one. If it hits a 70 it means it's a Wonder class b/c Nightmare won't have a 70 in it 
 			if(value_two == 70){
-				 cout << "Player One DeductPoints working :)" << endl;
+				cout << "Player One DeductPoints working :)" << endl;
 				player_one->deductPoints(); 
 				pointsGraphicOne->updatePoints(player_one->getPoints());
+				player_two->hit(x, y); 
+				attemptsBoardOne->updateBoard(player_two->getGrid());
 				attemptsGraphicOne->updateAttempts(player_one->getAttempts()); 		 
         			deduct = true;
 			} 
 						
-			//char enter11 = 0;
-                //cin >> enter11;
-                //cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                //if(enter11 > 0){system("clear");}
 		
 		system("clear");				
 			cout << "*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_" << endl << endl;
@@ -419,7 +364,7 @@ main(){
 
 
 // ---------   creating array --------------------	
-		 int** arr5 = player_one->getGrid();
+		/* int** arr5 = player_one->getGrid();
         cout << "******************** TEMP CODE ****************************" << endl;
          cout << "~~~~~~~~~~~~~~~~ " << player_one->getName() << "'s Grid ~~~~~~~~~~~~~~~~~~~~" << endl;
         for(int i = 0; i < 6; ++i){
@@ -429,9 +374,12 @@ main(){
                 cout << endl;
         }
 
-        cout << "******************* END TEMP CODE *************************" << endl;
+        cout << "******************* END TEMP CODE *************************" << endl;*/
 
 // ```````````  Getting coordinates from player two ```````````````````
+	
+				
+
                 playerTwoWindow->drawBoard();
                 
                 cout << "Please enter a coordinate. For example \"A1\"" << endl;
@@ -495,15 +443,19 @@ main(){
 			        }
                                 //the players get three turns with this setting. After three turns it goes back to the normal setting
                                 bonusValueTurns = 3;
+				player_one->hit(x2, y2);
                                 mainBoardTwo->updateBoard(player_two->getGrid()); //since getGrid() returns an array pointer I may not neet to do this b/c it'll automatically get updated                                                                                when playerOneWindow->draw(); is called.                     
-                        }
+                        	attemptsBoardTwo->updateBoard(player_one->getGrid());
+			}
                         //if the value is Skip Turn
                         if(value_one == 50){
         			skip2 = true; 
 				cout << "Player Two skipTurns working :)" << endl;
                                 player_two->setStratFunction(new SkipTurn()); //player_one or two??
                                 player_two->editGameState(); //editGameState will set player_one's attempts to zero
-                                attemptsGraphicTwo->updateAttempts(0);
+                                player_one->hit(x2, y2);
+				attemptsGraphicTwo->updateAttempts(0);
+				attemptsBoardTwo->updateBoard(player_one->getGrid());
                                 player_two_attempts = 0;
                         }
 
@@ -512,21 +464,13 @@ main(){
 				 cout << "Player Two AutoWin working :)" << endl;
                                 player_two->setStratFunction(new AutoWin());
                                 player_two->editGameState();
+				player_one->hit(x2, y2);
+				attemptsBoardTwo->updateBoard(player_one->getGrid());
 				cout << "Working after AutoWin " << player_two->getGameOver() << endl; 
                         }
 			
-                        //if(value_one == 70){
-			//	 cout << "Player Two DeductPoints working :)" << endl;
-                                //player_two->deductPoints();
-                          //      pointsGraphicTwo->updatePoints(player_two->getPoints());
-                            //    attemptsGraphicTwo->updateAttempts(player_two->getAttempts());
-                        //}
 			
 // **************  Clearing Console *******************************
-			// char  enter3 = 0;
-               // cin >> enter3;
-               // cin.ignore(numeric_limits<streamsize>::max(),'\n');
-                //if(enter3 > 0){system("clear");}
 		system("clear");
 
 			 cout << "*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_*_" << endl << endl;
@@ -555,17 +499,6 @@ main(){
 
 			playerTwoWindow->drawBoard();
 
-			/*int** arr6 = player_two->getGrid();
-        cout << "******************** TEMP CODE ****************************" << endl;
-	 cout << "~~~~~~~~~PLAYER TWO~~~~~~~~~~" << endl;
-        for(int i = 0; i < 6; ++i){
-                for(int j = 0; j < 6; ++j){
-                        cout << arr6[i][j] << ",";
-                }
-                cout << endl;
-        }
-
-        cout << "******************* END TEMP CODE *************************" << endl;*/
  		
 	           }
 

@@ -7,10 +7,10 @@ Text::Text(int theme, string name) {
         this->name = "";
     }
     if (theme == 1) {
-        this->theme = "Wonderland";
+        this->theme = "Winter Wonderland";
     }
     if (theme == 2) {
-        this->theme = "Nightmare";
+        this->theme = "Nightmare Before Christmas";
     }
 }
 

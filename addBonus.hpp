@@ -17,9 +17,7 @@ public:
 	AddBonus(){} 
 
         void visitWonderland(Neighborhood* neigh){
-	 	cout << "Working bonus 1 " << endl; 	
 		int** ar = neigh->getGrid(); 
-		cout << "Working bonus 1 " << endl;
 		// int ar[7][7] = Neighborhood->getGrid();
 
 		for(int i = 0; i < 6; ++i)
