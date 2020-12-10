@@ -29,7 +29,7 @@ void Wonderland::accept(Visitor* v){
 }
 void Wonderland::setAttempts(int x){
         attempts = x;
-	cout << "ATTEMPTS = " << x << ",  " << attempts << endl; 
+
 }
 void Wonderland::setGameOver(){
 	gameOver = true;
