@@ -20,7 +20,6 @@ Our Main file will be able to call the Graphics Class, the Neighborhood Class an
 ## Class Diagram
  https://github.com/cs100/final-project-jordo018-akris023-pfala001/blob/master/OMT%20Diagram.pdf
 
- > ## Final deliverable
  ## Screenshots
  ![test image](https://github.com/cs100/final-project-jordo018-akris023-pfala001/blob/master/CS100%20Project%20SS1.png)
  ![test image2](https://github.com/cs100/final-project-jordo018-akris023-pfala001/blob/master/CS100%20Project%20SS2.png)
