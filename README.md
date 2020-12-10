@@ -19,7 +19,7 @@ Our Main file will be able to call the Graphics Class, the Neighborhood Class an
 
 ## Class Diagram
  <p align="center">
-    <img src="OMT Diagram.pdf">
+    <img src="Christmas Project.png">
  </p>
  https://github.com/cs100/final-project-jordo018-akris023-pfala001/blob/master/OMT%20Diagram.pdf
 
