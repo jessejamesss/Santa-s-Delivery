@@ -26,7 +26,7 @@ Our Main file will be able to call the Graphics Class, the Neighborhood Class an
  > * Complete the sections below (i.e. Screenshots, Installation/Usage, Testing)
  > * Plan one more sprint (that you will not necessarily complete before the end of the quarter). Your In-progress and In-testing columns should be empty (you are not doing more work currently) but your TODO column should have a full sprint plan in it as you have done before. This should include any known bugs (there should be some) or new features you would like to add. These should appear as issues/cards on your Kanban board. 
  ## Screenshots
- > Screenshots of the input/output after running your application
+ ![test image](/CS100 Project SS1.png)
  ## Installation/Usage
  > Instructions on installing and running your application
  ## Testing
