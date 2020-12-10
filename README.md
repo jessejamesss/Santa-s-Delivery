@@ -33,6 +33,8 @@ Our Main file will be able to call the Graphics Class, the Neighborhood Class an
  ![test image5](https://github.com/cs100/final-project-jordo018-akris023-pfala001/blob/master/CS100%20Project%20SS5.png)
  ## Installation/Usage
  > Instructions on installing and running your application
+ > * To install our project, you would have to clone our project's repository and run it in terminal.
+ > * To compile our project first run the command "cmake3 .". After, run the command "make". Finally, run the project using "./main".
  ## Testing
  > How was your project tested/validated? If you used CI, you should have a "build passing" badge in this README.
  > * To test our project, we used Google's Unit Test Framework for C++. We utilized the Google Unit Test Framework to create unit tests for each of our classes that implemented our respective features.
